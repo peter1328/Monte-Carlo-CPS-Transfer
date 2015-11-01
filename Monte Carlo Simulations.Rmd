@@ -1,6 +1,6 @@
 ##Monte Carlo Simulations for Power Estimation
 
-A Monte Carlo simulation study was conducted for power estimation in the software Mplus (MuthÃ©n & MuthÃ©n, 2014). An introduction to Monte Carlo power analysis in Mplus is provided in Muthen and Muthen (2002). A discussion of  the specification of intervention effects is given in Thoemmes, MacKinnon, and Reiser (2010).
+A Monte Carlo simulation study was conducted for power estimation in the software Mplus (Muthén & Muthén, 2014). An introduction to Monte Carlo power analysis in Mplus is provided in Muthen and Muthen (2002). A discussion of  the specification of intervention effects is given in Thoemmes, MacKinnon, and Reiser (2010).
 
 ###Aim of the Simulation Study
 The aim of the simulation study was to estimate the power (probability of finding a significant effect) for detecting intervention effects of the Experimentation Skills Training and the MINT Curriculum. It should be evaluated at which smaple size the threshold for adequate power of >.80 is reached, and which power is reached with the maximum planned sample size of N = 1200.
@@ -23,12 +23,29 @@ Apart from the twolevel regression model, all assumptions were chosen in a conse
 ##Results
 Esimated power to detect the intervention effects in dependence of sample size is depicted in Figure 1. The threshold of power >.80 was reached at a sample size of N = 700. At the maximum planned sample size of 1200, power was estimated at .96. These results confirm that a sample size of between 700 and 1200 students can be seen optimal to detect small to moderate transfer effects with sufficiently high but not too high certainty and an optimal balance of alpha and beta error risk can be reached.
 
-![plot of chunk unnamed-chunk-1](figure/unnamed-chunk-1-1.png) 
+```{r, echo=FALSE, fig.height=5}
+library(ggplot2)
+MCdata <- data.frame(Sample_Size=c(500, 600, 700, 800, 900, 1000, 1100, 1200), Power = c(0.66, 0.74, 0.82, 0.86,
+                                                                                         0.90, 0.92, 0.94, 0.96))
+
+ggplot(MCdata, aes(x=Sample_Size, y=Power)) +
+  geom_point(size = 5, shape=2) +
+  geom_line(size = 2, colour = "grey30") +
+  scale_x_continuous("Sample Size", breaks=c(500, 600, 700, 800, 900, 1000, 1100, 1200)) +
+  scale_y_continuous("Power", breaks = c(.60, .65, .70, .75, .80, .85, .90, .95)) +
+  theme(text = element_text(size=20), #Larger text font size
+        panel.background = element_rect(fill = 'white', colour = 'black'), #Figure background colour
+        panel.grid.major=element_blank(), #Remove major grid
+        panel.grid.minor=element_blank(), #Remove minor grid
+        axis.text.x = element_text(colour="black"), #x-Axis text colour
+        axis.text.y = element_text(colour="black")) + #y-Axis text colour
+  geom_hline(yintercept=.80, color ="red", size = 1, linetype = 1)
+```
 
 
 ##References
-MuthÃ©n, B., & Muthen, L. (2002). How to decide on smaple size using Monte Carlo Simulations in Mplus. Structurla Equation Modeling, 2, 599-638.
-MuthÃ©n, B., & Muthen, L. (2014). Mplus User's Guide. Brooklyn, NY.
+Muthén, B., & Muthen, L. (2002). How to decide on smaple size using Monte Carlo Simulations in Mplus. Structurla Equation Modeling, 2, 599-638.
+Muthén, B., & Muthen, L. (2014). Mplus User's Guide. Brooklyn, NY.
 Thoemmes, MacKinnon, and Reiser (2010). Power Analysis for Complex Mediational Models in Mplus. Structurla Equation Modeling, 12, 99-128.
 
 

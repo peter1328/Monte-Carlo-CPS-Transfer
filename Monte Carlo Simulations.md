@@ -1,6 +1,6 @@
 ##Monte Carlo Simulations for Power Estimation
 
-A Monte Carlo simulation study was conducted for power estimation in the software Mplus (MuthÃ©n & MuthÃ©n, 2014). An introduction to Monte Carlo power analysis in Mplus is provided in Muthen and Muthen (2002). A discussion of  the specification of intervention effects is given in Thoemmes, MacKinnon, and Reiser (2010).
+A Monte Carlo simulation study was conducted for power estimation in the software Mplus (Muthén & Muthén, 2014). An introduction to Monte Carlo power analysis in Mplus is provided in Muthen and Muthen (2002). A discussion of  the specification of intervention effects is given in Thoemmes, MacKinnon, and Reiser (2010).
 
 ###Aim of the Simulation Study
 The aim of the simulation study was to estimate the power (probability of finding a significant effect) for detecting intervention effects of the Experimentation Skills Training and the MINT Curriculum. It should be evaluated at which smaple size the threshold for adequate power of >.80 is reached, and which power is reached with the maximum planned sample size of N = 1200.
@@ -27,8 +27,8 @@ Esimated power to detect the intervention effects in dependence of sample size i
 
 
 ##References
-MuthÃ©n, B., & Muthen, L. (2002). How to decide on smaple size using Monte Carlo Simulations in Mplus. Structurla Equation Modeling, 2, 599-638.
-MuthÃ©n, B., & Muthen, L. (2014). Mplus User's Guide. Brooklyn, NY.
+Muthén, B., & Muthen, L. (2002). How to decide on smaple size using Monte Carlo Simulations in Mplus. Structurla Equation Modeling, 2, 599-638.
+Muthén, B., & Muthen, L. (2014). Mplus User's Guide. Brooklyn, NY.
 Thoemmes, MacKinnon, and Reiser (2010). Power Analysis for Complex Mediational Models in Mplus. Structurla Equation Modeling, 12, 99-128.
 
 
