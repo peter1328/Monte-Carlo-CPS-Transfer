@@ -1,0 +1,95 @@
+TITLE:	Monte Carlo Simulation
+        for Transfer Effect
+        of Intervention on Complex Problem Solving
+Assumptions:
+- Intraclass correlation coefficient about .10:
+  The variance between classrooms makes up
+  about 10% of the whole variance after the intervention
+  (about 8% before intervention,
+   1% due to intervention,
+   1% due to non-controllable factors)
+- Posttest variance within classrooms:
+  80% explained by pretest (retest-reliability)
+  20% left unexplained
+- Posttest variance between classrooms:
+  about 80% explained by pretest
+  about 5% explained by est: Experimentaion Skills Training
+  about 5% explained by mint: MINT Curriculum
+  about 10% left unexplained due to non-controllable factors
+- 10% Missing data on posttest
+- Class sizes vary from 10 t0 30 children per class,
+  with more classes in the middle range (15-25 children)
+
+montecarlo:
+        ! Define simulated variables
+  		names are 
+        post ! Complex Problem Solving posttest
+        pre  ! Compelx Problem Solving pretest
+        est  ! Intervention 1: Expeirmentation Skills Training
+        mint;! Intervention 2: MINT curriculum
+  		nobservations = 1200; ! Total sample size for each Monte Carlo-draw
+  		ncsizes = 5; ! Nubmer of different classroom sizes
+        ! Classroom sample: Overall 60 Classrooms with 10 - 30 children
+  		csizes = 6 (10) 14 (15)  20 (20)  14 (25)  6 (30); ! Number and size of the 60 classrooms
+        ! Define intervention variable (>.5 = intervention group;
+                                        ! see Thoemmes, MacKinnon, & Reiser, 2010)
+        cutpoints = est (.5) mint (.5);
+        ! Define missing values
+        PATMISS = post (.10); ! 10% of posttest-data CPS are missing
+  		PATPROBS = 1;
+        ! Define seed for quasi-random number generation
+        seed = 666;
+        ! Define number of Monte Carlo draws from the population
+  		nreps = 10000;
+        ! Define variables on second level (school class level)
+          between = est mint; ! The interventions happen on the classroom level
+        !save = MCTransfer_*.dat; ! Activate to save sampled data
+        !repsave = all;         ! Activate to save sampled data
+
+ANALYSIS:   TYPE = TWOLEVEL;
+
+model population:
+		
+        %within%
+        ! Posttest-residual variance
+        post*2; ! Retest-reliability .80 20% variance not explained by pre-test
+        pre*10; ! Pretest-variance within classrooms
+        post ON pre*.894; ! Pretest explains 80% (.894^2) of posttest       
+
+        %between%
+        post*.10; ! 10% of posttest-variance unexplained
+        pre*1; ! Pretest-variance between classrooms
+        [est*.5]; ! Mean of "est" intervention variable
+        ! Variance of "est" intervention variable
+        est*.25; ! .25 so that SD = .5
+        [mint*.5]; ! Mean of "mint" intervention variable
+        ! Variance of "mint" intervention variable
+        mint*.25; ! .25 so that SD = .5
+        ! Regression of posttest variance between classrooms
+        post ON pre*.949 est*.447 mint*.447; ! .90 explained by pretest (.949^2*1),
+                                             ! .05 by est (.447^2*.25),
+                                             ! .05 by mint (.447^2*.25)
+                                             ! = 1.00 explained variance,
+                                             ! .10 non-explained,
+                                             ! sums up to variance of 1.10 at posttest
+                                             ! which makes up an ICC of about .10
+        		
+model:
+        ! Same as population model without mentioning
+        ! means and variances of exogenous variables
+        %within%
+        post*2;
+
+        post ON pre*.894;
+
+        %between%
+        post*.10;
+
+
+
+        post ON pre*.949 est*.447 mint*.447;
+
+
+
+output:
+		tech9; ! Show simulation results

@@ -1,0 +1,841 @@
+Mplus VERSION 7.11
+MUTHEN & MUTHEN
+02/25/2015  10:05 PM
+
+INPUT INSTRUCTIONS
+
+  TITLE:	this is an example of a two-level
+  		regression analysis for a continuous
+  		dependent variable
+
+  montecarlo:
+  		names are post pre int1;! int2;
+  		nobservations = 1200;
+  		ncsizes = 3;
+  		csizes = 20 (15) 20 (20) 20 (25);
+          cutpoints = int1 (0.5);
+  		seed = 666;
+  		nreps = 50;
+  		!within = x;
+          between = int1;! int2;
+  		save = MC_CPSTransfer_POST.dat;
+
+  ANALYSIS:  TYPE = TWOLEVEL;
+
+  model population:
+  		%within%
+  		![pre@0];
+          pre@1;
+  		post on pre*1.6; !
+  		post*.36;
+  		%between%
+          [pre@0];
+          pre@1;
+          [int1@.5];
+          int1@.25;
+  		![int2@0]; int2@.5;
+          !int1 with int2@.5;
+  		post on pre*.894 int1*.894;! int2*.4;
+  		[post*0];
+  		post*0;
+  		
+  model:
+          %within%
+  	
+  		post on pre*.80 (gamma10);
+  		post*.36;
+  		
+          %between%
+  		post on pre*.894 int1*.894;! int2*.4;
+              pre*1 (gamma01);
+  		[post*0];
+  		post*.0;
+
+          model constraint:
+          new(betac*.25);
+          betac = gamma01 - gamma10;
+
+  output:
+  		tech9;
+
+
+
+INPUT READING TERMINATED NORMALLY
+
+
+
+this is an example of a two-level
+regression analysis for a continuous
+dependent variable
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                        1200
+
+Number of replications
+    Requested                                                   50
+    Completed                                                    0
+Value of seed                                                  666
+
+Number of dependent variables                                    1
+Number of independent variables                                  2
+Number of continuous latent variables                            0
+
+Observed dependent variables
+
+  Continuous
+   POST
+
+Observed independent variables
+   PRE         INT1
+
+Variables with special functions
+
+  Between variables
+   INT1
+
+
+Estimator                                                      MLR
+Information matrix                                        OBSERVED
+Maximum number of iterations                                   100
+Convergence criterion                                    0.100D-05
+Maximum number of EM iterations                                500
+Convergence criteria for the EM algorithm
+  Loglikelihood change                                   0.100D-02
+  Relative loglikelihood change                          0.100D-05
+  Derivative                                             0.100D-03
+Minimum variance                                         0.100D-03
+Maximum number of steepest descent iterations                   20
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Optimization algorithm                                         EMA
+
+
+SUMMARY OF DATA FOR THE FIRST REPLICATION
+
+     Cluster information
+
+       Size (s)    Number of clusters of Size s
+
+         15            20
+         20            20
+         25            20
+
+     Average cluster size       20.000
+
+     Estimated Intraclass Correlations for the Y Variables
+
+                Intraclass              Intraclass
+     Variable  Correlation   Variable  Correlation
+
+     POST         0.228      PRE          0.417
+
+
+SAMPLE STATISTICS FOR THE FIRST REPLICATION
+
+NOTE:  The sample statistics for within and between refer to the
+       maximum-likelihood estimated within and between covariance
+       matrices, respectively.
+
+
+     ESTIMATED SAMPLE STATISTICS FOR WITHIN
+
+
+           Means
+              POST          PRE           INT1
+              ________      ________      ________
+ 1              0.000         0.000         0.000
+
+
+           Covariances
+              POST          PRE           INT1
+              ________      ________      ________
+ POST           2.878
+ PRE            1.558         0.962
+ INT1           0.000         0.000         0.000
+
+
+           Correlations
+              POST          PRE           INT1
+              ________      ________      ________
+ POST           1.000
+ PRE            0.936         1.000
+ INT1           0.000         0.000         0.000
+
+
+     ESTIMATED SAMPLE STATISTICS FOR BETWEEN
+
+
+           Means
+              POST          PRE           INT1
+              ________      ________      ________
+ 1              0.667         0.118         0.600
+
+
+           Covariances
+              POST          PRE           INT1
+              ________      ________      ________
+ POST           0.850
+ PRE            0.679         0.689
+ INT1           0.268         0.064         0.240
+
+
+           Correlations
+              POST          PRE           INT1
+              ________      ________      ________
+ POST           1.000
+ PRE            0.887         1.000
+ INT1           0.594         0.157         1.000
+
+
+
+
+
+MODEL RESULTS
+
+                           ESTIMATES              S. E.     M. S. E.  95%  % Sig
+              Population   Average   Std. Dev.   Average             Cover Coeff
+Within Level
+
+ POST       ON
+  PRE              0.800     0.0000     0.0000     0.0000     0.0000 0.000 0.000
+
+ Variances
+  PRE              0.500     0.0000     0.0000     0.0000     0.0000 0.000 0.000
+
+ Residual Variances
+  POST             0.360     0.0000     0.0000     0.0000     0.0000 0.000 0.000
+
+Between Level
+
+ POST       ON
+  PRE              0.894     0.0000     0.0000     0.0000     0.0000 0.000 0.000
+  INT1             0.894     0.0000     0.0000     0.0000     0.0000 0.000 0.000
+
+ Means
+  PRE              0.000     0.0000     0.0000     0.0000     0.0000 0.000 0.000
+
+ Intercepts
+  POST             0.000     0.0000     0.0000     0.0000     0.0000 0.000 0.000
+
+ Variances
+  PRE              1.000     0.0000     0.0000     0.0000     0.0000 0.000 0.000
+
+ Residual Variances
+  POST             0.000     0.0000     0.0000     0.0000     0.0000 0.000 0.000
+
+ New/Additional Parameters
+  BETAC            0.250     0.0000     0.0000     0.0000     0.0000 0.000 0.000
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Average Condition Number for the Information Matrix      0.000E+00
+       (ratio of smallest to largest eigenvalue)
+
+
+TECHNICAL 1 OUTPUT
+
+
+     PARAMETER SPECIFICATION FOR WITHIN
+
+
+           NU
+              POST          PRE           INT1
+              ________      ________      ________
+ 1                  0             0             0
+
+
+           LAMBDA
+              POST          PRE           INT1
+              ________      ________      ________
+ POST               0             0             0
+ PRE                0             0             0
+ INT1               0             0             0
+
+
+           THETA
+              POST          PRE           INT1
+              ________      ________      ________
+ POST               0
+ PRE                0             0
+ INT1               0             0             0
+
+
+           ALPHA
+              POST          PRE           INT1
+              ________      ________      ________
+ 1                  0             0             0
+
+
+           BETA
+              POST          PRE           INT1
+              ________      ________      ________
+ POST               0             1             0
+ PRE                0             0             0
+ INT1               0             0             0
+
+
+           PSI
+              POST          PRE           INT1
+              ________      ________      ________
+ POST               2
+ PRE                0             3
+ INT1               0             0             0
+
+
+     PARAMETER SPECIFICATION FOR BETWEEN
+
+
+           NU
+              POST          PRE           INT1
+              ________      ________      ________
+ 1                  0             0             0
+
+
+           LAMBDA
+              POST          PRE           INT1
+              ________      ________      ________
+ POST               0             0             0
+ PRE                0             0             0
+ INT1               0             0             0
+
+
+           THETA
+              POST          PRE           INT1
+              ________      ________      ________
+ POST               0
+ PRE                0             0
+ INT1               0             0             0
+
+
+           ALPHA
+              POST          PRE           INT1
+              ________      ________      ________
+ 1                  4             5             0
+
+
+           BETA
+              POST          PRE           INT1
+              ________      ________      ________
+ POST               0             6             7
+ PRE                0             0             0
+ INT1               0             0             0
+
+
+           PSI
+              POST          PRE           INT1
+              ________      ________      ________
+ POST               8
+ PRE                0             9
+ INT1               0             0             0
+
+
+     PARAMETER SPECIFICATION FOR THE ADDITIONAL PARAMETERS
+
+
+           NEW/ADDITIONAL PARAMETERS
+              BETAC
+              ________
+ 1                 10
+
+
+     STARTING VALUES FOR WITHIN
+
+
+           NU
+              POST          PRE           INT1
+              ________      ________      ________
+ 1              0.000         0.000         0.000
+
+
+           LAMBDA
+              POST          PRE           INT1
+              ________      ________      ________
+ POST           1.000         0.000         0.000
+ PRE            0.000         1.000         0.000
+ INT1           0.000         0.000         1.000
+
+
+           THETA
+              POST          PRE           INT1
+              ________      ________      ________
+ POST           0.000
+ PRE            0.000         0.000
+ INT1           0.000         0.000         0.000
+
+
+           ALPHA
+              POST          PRE           INT1
+              ________      ________      ________
+ 1              0.000         0.000         0.000
+
+
+           BETA
+              POST          PRE           INT1
+              ________      ________      ________
+ POST           0.000         0.800         0.000
+ PRE            0.000         0.000         0.000
+ INT1           0.000         0.000         0.000
+
+
+           PSI
+              POST          PRE           INT1
+              ________      ________      ________
+ POST           0.360
+ PRE            0.000         0.500
+ INT1           0.000         0.000         0.000
+
+
+     STARTING VALUES FOR BETWEEN
+
+
+           NU
+              POST          PRE           INT1
+              ________      ________      ________
+ 1              0.000         0.000         0.000
+
+
+           LAMBDA
+              POST          PRE           INT1
+              ________      ________      ________
+ POST           1.000         0.000         0.000
+ PRE            0.000         1.000         0.000
+ INT1           0.000         0.000         1.000
+
+
+           THETA
+              POST          PRE           INT1
+              ________      ________      ________
+ POST           0.000
+ PRE            0.000         0.000
+ INT1           0.000         0.000         0.000
+
+
+           ALPHA
+              POST          PRE           INT1
+              ________      ________      ________
+ 1              0.000         0.000         0.000
+
+
+           BETA
+              POST          PRE           INT1
+              ________      ________      ________
+ POST           0.000         0.894         0.894
+ PRE            0.000         0.000         0.000
+ INT1           0.000         0.000         0.000
+
+
+           PSI
+              POST          PRE           INT1
+              ________      ________      ________
+ POST           0.000
+ PRE            0.000         1.000
+ INT1           0.000         0.000         0.500
+
+
+     STARTING VALUES FOR THE ADDITIONAL PARAMETERS
+
+
+           NEW/ADDITIONAL PARAMETERS
+              BETAC
+              ________
+ 1              0.250
+
+
+     POPULATION VALUES FOR WITHIN
+
+
+           NU
+              POST          PRE           INT1
+              ________      ________      ________
+ 1              0.000         0.000         0.000
+
+
+           LAMBDA
+              POST          PRE           INT1
+              ________      ________      ________
+ POST           1.000         0.000         0.000
+ PRE            0.000         1.000         0.000
+ INT1           0.000         0.000         1.000
+
+
+           THETA
+              POST          PRE           INT1
+              ________      ________      ________
+ POST           0.000
+ PRE            0.000         0.000
+ INT1           0.000         0.000         0.000
+
+
+           ALPHA
+              POST          PRE           INT1
+              ________      ________      ________
+ 1              0.000         0.000         0.000
+
+
+           BETA
+              POST          PRE           INT1
+              ________      ________      ________
+ POST           0.000         1.600         0.000
+ PRE            0.000         0.000         0.000
+ INT1           0.000         0.000         0.000
+
+
+           PSI
+              POST          PRE           INT1
+              ________      ________      ________
+ POST           0.360
+ PRE            0.000         1.000
+ INT1           0.000         0.000         0.000
+
+
+     POPULATION VALUES FOR BETWEEN
+
+
+           NU
+              POST          PRE           INT1
+              ________      ________      ________
+ 1              0.000         0.000         0.000
+
+
+           LAMBDA
+              POST          PRE           INT1
+              ________      ________      ________
+ POST           1.000         0.000         0.000
+ PRE            0.000         1.000         0.000
+ INT1           0.000         0.000         1.000
+
+
+           THETA
+              POST          PRE           INT1
+              ________      ________      ________
+ POST           0.000
+ PRE            0.000         0.000
+ INT1           0.000         0.000         0.000
+
+
+           ALPHA
+              POST          PRE           INT1
+              ________      ________      ________
+ 1              0.000         0.000         0.500
+
+
+           BETA
+              POST          PRE           INT1
+              ________      ________      ________
+ POST           0.000         0.894         0.894
+ PRE            0.000         0.000         0.000
+ INT1           0.000         0.000         0.000
+
+
+           PSI
+              POST          PRE           INT1
+              ________      ________      ________
+ POST           0.000
+ PRE            0.000         1.000
+ INT1           0.000         0.000         0.250
+
+
+TECHNICAL 9 OUTPUT
+
+  Error messages for each replication (if any)
+
+
+     REPLICATION 1:
+     THE ESTIMATED BETWEEN COVARIANCE MATRIX IS NOT POSITIVE DEFINITE AS IT
+     SHOULD BE.  COMPUTATION COULD NOT BE COMPLETED.
+     PROBLEM INVOLVING VARIABLE POST.
+     THE PROBLEM MAY BE RESOLVED BY SETTING ALGORITHM=EM AND MCONVERGENCE
+     TO A LARGE VALUE.
+
+     REPLICATION 1:
+     THE MODEL ESTIMATION DID NOT TERMINATE NORMALLY DUE TO AN ERROR IN THE
+     COMPUTATION.  CHANGE YOUR MODEL AND/OR STARTING VALUES.
+
+
+     REPLICATION 2:
+     THE MODEL ESTIMATION DID NOT TERMINATE NORMALLY DUE TO AN ERROR IN THE
+     COMPUTATION.  CHANGE YOUR MODEL AND/OR STARTING VALUES.
+
+
+     REPLICATION 3:
+     THE MODEL ESTIMATION DID NOT TERMINATE NORMALLY DUE TO AN ERROR IN THE
+     COMPUTATION.  CHANGE YOUR MODEL AND/OR STARTING VALUES.
+
+
+     REPLICATION 4:
+     THE MODEL ESTIMATION DID NOT TERMINATE NORMALLY DUE TO AN ERROR IN THE
+     COMPUTATION.  CHANGE YOUR MODEL AND/OR STARTING VALUES.
+
+
+     REPLICATION 5:
+     THE MODEL ESTIMATION DID NOT TERMINATE NORMALLY DUE TO AN ERROR IN THE
+     COMPUTATION.  CHANGE YOUR MODEL AND/OR STARTING VALUES.
+
+
+     REPLICATION 6:
+     THE MODEL ESTIMATION DID NOT TERMINATE NORMALLY DUE TO AN ERROR IN THE
+     COMPUTATION.  CHANGE YOUR MODEL AND/OR STARTING VALUES.
+
+
+     REPLICATION 7:
+     THE MODEL ESTIMATION DID NOT TERMINATE NORMALLY DUE TO AN ERROR IN THE
+     COMPUTATION.  CHANGE YOUR MODEL AND/OR STARTING VALUES.
+
+
+     REPLICATION 8:
+     THE MODEL ESTIMATION DID NOT TERMINATE NORMALLY DUE TO AN ERROR IN THE
+     COMPUTATION.  CHANGE YOUR MODEL AND/OR STARTING VALUES.
+
+
+     REPLICATION 9:
+     THE MODEL ESTIMATION DID NOT TERMINATE NORMALLY DUE TO AN ERROR IN THE
+     COMPUTATION.  CHANGE YOUR MODEL AND/OR STARTING VALUES.
+
+
+     REPLICATION 10:
+     THE MODEL ESTIMATION DID NOT TERMINATE NORMALLY DUE TO AN ERROR IN THE
+     COMPUTATION.  CHANGE YOUR MODEL AND/OR STARTING VALUES.
+
+
+     REPLICATION 11:
+     THE MODEL ESTIMATION DID NOT TERMINATE NORMALLY DUE TO AN ERROR IN THE
+     COMPUTATION.  CHANGE YOUR MODEL AND/OR STARTING VALUES.
+
+
+     REPLICATION 12:
+     THE MODEL ESTIMATION DID NOT TERMINATE NORMALLY DUE TO AN ERROR IN THE
+     COMPUTATION.  CHANGE YOUR MODEL AND/OR STARTING VALUES.
+
+
+     REPLICATION 13:
+     THE MODEL ESTIMATION DID NOT TERMINATE NORMALLY DUE TO AN ERROR IN THE
+     COMPUTATION.  CHANGE YOUR MODEL AND/OR STARTING VALUES.
+
+
+     REPLICATION 14:
+     THE MODEL ESTIMATION DID NOT TERMINATE NORMALLY DUE TO AN ERROR IN THE
+     COMPUTATION.  CHANGE YOUR MODEL AND/OR STARTING VALUES.
+
+
+     REPLICATION 15:
+     THE MODEL ESTIMATION DID NOT TERMINATE NORMALLY DUE TO AN ERROR IN THE
+     COMPUTATION.  CHANGE YOUR MODEL AND/OR STARTING VALUES.
+
+
+     REPLICATION 16:
+     THE MODEL ESTIMATION DID NOT TERMINATE NORMALLY DUE TO AN ERROR IN THE
+     COMPUTATION.  CHANGE YOUR MODEL AND/OR STARTING VALUES.
+
+
+     REPLICATION 17:
+     THE MODEL ESTIMATION DID NOT TERMINATE NORMALLY DUE TO AN ERROR IN THE
+     COMPUTATION.  CHANGE YOUR MODEL AND/OR STARTING VALUES.
+
+
+     REPLICATION 18:
+     THE MODEL ESTIMATION DID NOT TERMINATE NORMALLY DUE TO AN ERROR IN THE
+     COMPUTATION.  CHANGE YOUR MODEL AND/OR STARTING VALUES.
+
+
+     REPLICATION 19:
+     THE MODEL ESTIMATION DID NOT TERMINATE NORMALLY DUE TO AN ERROR IN THE
+     COMPUTATION.  CHANGE YOUR MODEL AND/OR STARTING VALUES.
+
+
+     REPLICATION 20:
+     THE MODEL ESTIMATION DID NOT TERMINATE NORMALLY DUE TO AN ERROR IN THE
+     COMPUTATION.  CHANGE YOUR MODEL AND/OR STARTING VALUES.
+
+
+     REPLICATION 21:
+     THE MODEL ESTIMATION DID NOT TERMINATE NORMALLY DUE TO AN ERROR IN THE
+     COMPUTATION.  CHANGE YOUR MODEL AND/OR STARTING VALUES.
+
+
+     REPLICATION 22:
+     THE MODEL ESTIMATION DID NOT TERMINATE NORMALLY DUE TO AN ERROR IN THE
+     COMPUTATION.  CHANGE YOUR MODEL AND/OR STARTING VALUES.
+
+
+     REPLICATION 23:
+     THE MODEL ESTIMATION DID NOT TERMINATE NORMALLY DUE TO AN ERROR IN THE
+     COMPUTATION.  CHANGE YOUR MODEL AND/OR STARTING VALUES.
+
+
+     REPLICATION 24:
+     THE MODEL ESTIMATION DID NOT TERMINATE NORMALLY DUE TO AN ERROR IN THE
+     COMPUTATION.  CHANGE YOUR MODEL AND/OR STARTING VALUES.
+
+
+     REPLICATION 25:
+     THE MODEL ESTIMATION DID NOT TERMINATE NORMALLY DUE TO AN ERROR IN THE
+     COMPUTATION.  CHANGE YOUR MODEL AND/OR STARTING VALUES.
+
+
+     REPLICATION 26:
+     THE MODEL ESTIMATION DID NOT TERMINATE NORMALLY DUE TO AN ERROR IN THE
+     COMPUTATION.  CHANGE YOUR MODEL AND/OR STARTING VALUES.
+
+
+     REPLICATION 27:
+     THE MODEL ESTIMATION DID NOT TERMINATE NORMALLY DUE TO AN ERROR IN THE
+     COMPUTATION.  CHANGE YOUR MODEL AND/OR STARTING VALUES.
+
+
+     REPLICATION 28:
+     THE MODEL ESTIMATION DID NOT TERMINATE NORMALLY DUE TO AN ERROR IN THE
+     COMPUTATION.  CHANGE YOUR MODEL AND/OR STARTING VALUES.
+
+
+     REPLICATION 29:
+     THE MODEL ESTIMATION DID NOT TERMINATE NORMALLY DUE TO AN ERROR IN THE
+     COMPUTATION.  CHANGE YOUR MODEL AND/OR STARTING VALUES.
+
+
+     REPLICATION 30:
+     THE MODEL ESTIMATION DID NOT TERMINATE NORMALLY DUE TO AN ERROR IN THE
+     COMPUTATION.  CHANGE YOUR MODEL AND/OR STARTING VALUES.
+
+
+     REPLICATION 31:
+     THE MODEL ESTIMATION DID NOT TERMINATE NORMALLY DUE TO AN ERROR IN THE
+     COMPUTATION.  CHANGE YOUR MODEL AND/OR STARTING VALUES.
+
+
+     REPLICATION 32:
+     THE MODEL ESTIMATION DID NOT TERMINATE NORMALLY DUE TO AN ERROR IN THE
+     COMPUTATION.  CHANGE YOUR MODEL AND/OR STARTING VALUES.
+
+
+     REPLICATION 33:
+     THE MODEL ESTIMATION DID NOT TERMINATE NORMALLY DUE TO AN ERROR IN THE
+     COMPUTATION.  CHANGE YOUR MODEL AND/OR STARTING VALUES.
+
+
+     REPLICATION 34:
+     THE MODEL ESTIMATION DID NOT TERMINATE NORMALLY DUE TO AN ERROR IN THE
+     COMPUTATION.  CHANGE YOUR MODEL AND/OR STARTING VALUES.
+
+
+     REPLICATION 35:
+     THE MODEL ESTIMATION DID NOT TERMINATE NORMALLY DUE TO AN ERROR IN THE
+     COMPUTATION.  CHANGE YOUR MODEL AND/OR STARTING VALUES.
+
+
+     REPLICATION 36:
+     THE MODEL ESTIMATION DID NOT TERMINATE NORMALLY DUE TO AN ERROR IN THE
+     COMPUTATION.  CHANGE YOUR MODEL AND/OR STARTING VALUES.
+
+
+     REPLICATION 37:
+     THE MODEL ESTIMATION DID NOT TERMINATE NORMALLY DUE TO AN ERROR IN THE
+     COMPUTATION.  CHANGE YOUR MODEL AND/OR STARTING VALUES.
+
+
+     REPLICATION 38:
+     THE MODEL ESTIMATION DID NOT TERMINATE NORMALLY DUE TO AN ERROR IN THE
+     COMPUTATION.  CHANGE YOUR MODEL AND/OR STARTING VALUES.
+
+
+     REPLICATION 39:
+     THE MODEL ESTIMATION DID NOT TERMINATE NORMALLY DUE TO AN ERROR IN THE
+     COMPUTATION.  CHANGE YOUR MODEL AND/OR STARTING VALUES.
+
+
+     REPLICATION 40:
+     THE MODEL ESTIMATION DID NOT TERMINATE NORMALLY DUE TO AN ERROR IN THE
+     COMPUTATION.  CHANGE YOUR MODEL AND/OR STARTING VALUES.
+
+
+     REPLICATION 41:
+     THE MODEL ESTIMATION DID NOT TERMINATE NORMALLY DUE TO AN ERROR IN THE
+     COMPUTATION.  CHANGE YOUR MODEL AND/OR STARTING VALUES.
+
+
+     REPLICATION 42:
+     THE MODEL ESTIMATION DID NOT TERMINATE NORMALLY DUE TO AN ERROR IN THE
+     COMPUTATION.  CHANGE YOUR MODEL AND/OR STARTING VALUES.
+
+
+     REPLICATION 43:
+     THE MODEL ESTIMATION DID NOT TERMINATE NORMALLY DUE TO AN ERROR IN THE
+     COMPUTATION.  CHANGE YOUR MODEL AND/OR STARTING VALUES.
+
+
+     REPLICATION 44:
+     THE MODEL ESTIMATION DID NOT TERMINATE NORMALLY DUE TO AN ERROR IN THE
+     COMPUTATION.  CHANGE YOUR MODEL AND/OR STARTING VALUES.
+
+
+     REPLICATION 45:
+     THE MODEL ESTIMATION DID NOT TERMINATE NORMALLY DUE TO AN ERROR IN THE
+     COMPUTATION.  CHANGE YOUR MODEL AND/OR STARTING VALUES.
+
+
+     REPLICATION 46:
+     THE MODEL ESTIMATION DID NOT TERMINATE NORMALLY DUE TO AN ERROR IN THE
+     COMPUTATION.  CHANGE YOUR MODEL AND/OR STARTING VALUES.
+
+
+     REPLICATION 47:
+     THE MODEL ESTIMATION DID NOT TERMINATE NORMALLY DUE TO AN ERROR IN THE
+     COMPUTATION.  CHANGE YOUR MODEL AND/OR STARTING VALUES.
+
+
+     REPLICATION 48:
+     THE MODEL ESTIMATION DID NOT TERMINATE NORMALLY DUE TO AN ERROR IN THE
+     COMPUTATION.  CHANGE YOUR MODEL AND/OR STARTING VALUES.
+
+
+     REPLICATION 49:
+     THE MODEL ESTIMATION DID NOT TERMINATE NORMALLY DUE TO AN ERROR IN THE
+     COMPUTATION.  CHANGE YOUR MODEL AND/OR STARTING VALUES.
+
+
+     REPLICATION 50:
+     THE MODEL ESTIMATION DID NOT TERMINATE NORMALLY DUE TO AN ERROR IN THE
+     COMPUTATION.  CHANGE YOUR MODEL AND/OR STARTING VALUES.
+
+
+
+SAVEDATA INFORMATION
+
+  Order of variables
+
+    POST
+    PRE
+    INT1
+    CLUSTER
+
+  Save file
+    MC_CPSTransfer_POST.dat
+
+  Save file format           Free
+  Save file record length    10000
+
+
+DIAGRAM INFORMATION
+
+  Mplus diagrams are currently not available for multilevel analysis.
+  No diagram output was produced.
+
+
+     Beginning Time:  22:05:16
+        Ending Time:  22:05:16
+       Elapsed Time:  00:00:00
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2013 Muthen & Muthen

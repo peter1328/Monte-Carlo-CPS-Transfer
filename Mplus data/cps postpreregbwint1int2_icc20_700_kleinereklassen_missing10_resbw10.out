@@ -1,0 +1,850 @@
+Mplus VERSION 7.11
+MUTHEN & MUTHEN
+02/26/2015   2:09 PM
+
+INPUT INSTRUCTIONS
+
+  TITLE:	Monte Carlo Simulation
+  for Transfer Effect
+  of Intervention on Complex Problem Solving
+  Assumptions:
+  - Intraclass correlation coefficient = .20
+  - Pretest explains 89% of between classroom variance at posttest
+  - Intervention explains 10% of between classroom variance at posttest
+  - 5% between classroom variance left unexplained at posttest
+  - 5% Missing data on posttest
+
+  montecarlo:
+  		names are post pre est mint;
+  		nobservations = 700;
+  		ncsizes = 5;
+  		csizes = 6 (10) 10 (15) 15(20) 4 (25) 3 (30);
+          cutpoints = est (.5) mint (.5);
+          PATMISS = post (.10);
+  		PATPROBS = 1;
+          seed = 666;
+  		nreps = 1000;
+          between = est mint;
+  		save = MCTransfer_*.dat;
+          repsave = all;
+
+  ANALYSIS:   TYPE = TWOLEVEL;
+              !ESTIMATOR = MLR;
+
+  model population:
+  		
+          %within%
+          post*1.3;
+          pre*4;
+          post ON pre*.894;
+
+          %between%
+          post*.10;
+          pre*1;
+          [est*.5];
+          est*.25;
+          [mint*.5];
+          mint*.25;
+          post ON pre*1 est*.447 mint*.447;
+          		
+  model:
+
+          %within%
+          post*1.3;
+
+          post ON pre*.894;
+
+          %between%
+          post*.10;
+
+
+
+          post ON pre*1 est*.447 mint*.447;
+
+
+
+  output:
+  		tech9;
+
+
+
+INPUT READING TERMINATED NORMALLY
+
+
+
+Monte Carlo Simulation
+for Transfer Effect
+of Intervention on Complex Problem Solving
+Assumptions:
+- Intraclass correlation coefficient = .20
+- Pretest explains 89% of between classroom variance at posttest
+- Intervention explains 10% of between classroom variance at posttest
+- 5% between classroom variance left unexplained at posttest
+- 5% Missing data on posttest
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                         700
+
+Number of replications
+    Requested                                                 1000
+    Completed                                                 1000
+Value of seed                                                  666
+
+Number of dependent variables                                    1
+Number of independent variables                                  3
+Number of continuous latent variables                            0
+
+Observed dependent variables
+
+  Continuous
+   POST
+
+Observed independent variables
+   PRE         EST         MINT
+
+Variables with special functions
+
+  Between variables
+   EST         MINT
+
+
+Estimator                                                      MLR
+Information matrix                                        OBSERVED
+Maximum number of iterations                                   100
+Convergence criterion                                    0.100D-05
+Maximum number of EM iterations                                500
+Convergence criteria for the EM algorithm
+  Loglikelihood change                                   0.100D-02
+  Relative loglikelihood change                          0.100D-05
+  Derivative                                             0.100D-03
+Minimum variance                                         0.100D-03
+Maximum number of steepest descent iterations                   20
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Optimization algorithm                                         EMA
+
+
+SUMMARY OF DATA FOR THE FIRST REPLICATION
+
+     Number of missing data patterns             1
+     Cluster information
+
+       Size (s)    Number of clusters of Size s
+
+         10             6
+         15            10
+         20            15
+         25             4
+         30             3
+
+     Average cluster size       18.421
+
+     Estimated Intraclass Correlations for the Y Variables
+
+                Intraclass
+     Variable  Correlation
+
+     POST         0.167
+
+
+SUMMARY OF MISSING DATA PATTERNS FOR THE FIRST REPLICATION
+
+
+     MISSING DATA PATTERNS (x = not missing)
+
+           1
+ POST      x
+ PRE       x
+ EST       x
+ MINT      x
+
+
+     MISSING DATA PATTERN FREQUENCIES
+
+    Pattern   Frequency
+          1         700
+
+
+COVARIANCE COVERAGE OF DATA FOR THE FIRST REPLICATION
+
+Minimum covariance coverage value   0.100
+
+
+     PROPORTION OF DATA PRESENT
+
+
+           Covariance Coverage
+              POST          PRE           EST           MINT
+              ________      ________      ________      ________
+ POST           1.000
+ PRE            1.000         1.000
+ EST            1.000         1.000         1.000
+ MINT           1.000         1.000         1.000         1.000
+
+
+SAMPLE STATISTICS FOR THE FIRST REPLICATION
+
+NOTE:  The sample statistics for within and between refer to the
+       maximum-likelihood estimated within and between covariance
+       matrices, respectively.
+
+
+     ESTIMATED SAMPLE STATISTICS FOR WITHIN
+
+
+           Means
+              POST          PRE           EST           MINT
+              ________      ________      ________      ________
+ 1              0.000         0.000         0.000         0.000
+
+
+           Covariances
+              POST          PRE           EST           MINT
+              ________      ________      ________      ________
+ POST           4.125
+ PRE            3.320         3.841
+ EST            0.000         0.000         0.000
+ MINT           0.000         0.000         0.000         0.000
+
+
+           Correlations
+              POST          PRE           EST           MINT
+              ________      ________      ________      ________
+ POST           1.000
+ PRE            0.834         1.000
+ EST            0.000         0.000         0.000
+ MINT           0.000         0.000         0.000         0.000
+
+
+     ESTIMATED SAMPLE STATISTICS FOR BETWEEN
+
+
+           Means
+              POST          PRE           EST           MINT
+              ________      ________      ________      ________
+ 1              0.490         0.019         0.500         0.658
+
+
+           Covariances
+              POST          PRE           EST           MINT
+              ________      ________      ________      ________
+ POST           0.824
+ PRE            0.740         0.750
+ EST            0.099         0.045         0.250
+ MINT           0.136         0.087        -0.039         0.225
+
+
+           Correlations
+              POST          PRE           EST           MINT
+              ________      ________      ________      ________
+ POST           1.000
+ PRE            0.941         1.000
+ EST            0.219         0.104         1.000
+ MINT           0.315         0.213        -0.166         1.000
+
+
+     MAXIMUM LOG-LIKELIHOOD VALUE FOR THE UNRESTRICTED (H1) MODEL IS -2577.312
+
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                        7
+
+Loglikelihood
+
+    H0 Value
+
+        Mean                             -2606.103
+        Std Dev                             25.640
+        Number of successful computations     1000
+
+             Proportions                   Percentiles
+        Expected    Observed         Expected       Observed
+           0.990       0.993        -2665.749      -2662.312
+           0.980       0.985        -2658.760      -2656.284
+           0.950       0.946        -2648.278      -2649.157
+           0.900       0.903        -2638.963      -2638.002
+           0.800       0.810        -2627.682      -2627.211
+           0.700       0.696        -2619.549      -2619.851
+           0.500       0.478        -2606.103      -2607.397
+           0.300       0.296        -2592.658      -2593.065
+           0.200       0.202        -2584.525      -2584.337
+           0.100       0.092        -2573.243      -2574.736
+           0.050       0.050        -2563.928      -2564.028
+           0.020       0.022        -2553.447      -2550.547
+           0.010       0.013        -2546.457      -2539.358
+
+    H1 Value
+
+        Mean                             -2606.103
+        Std Dev                             25.640
+        Number of successful computations     1000
+
+             Proportions                   Percentiles
+        Expected    Observed         Expected       Observed
+           0.990       0.993        -2665.749      -2662.312
+           0.980       0.985        -2658.759      -2656.285
+           0.950       0.946        -2648.278      -2649.157
+           0.900       0.903        -2638.963      -2637.997
+           0.800       0.810        -2627.681      -2627.211
+           0.700       0.696        -2619.549      -2619.851
+           0.500       0.478        -2606.103      -2607.398
+           0.300       0.296        -2592.658      -2593.065
+           0.200       0.202        -2584.525      -2584.337
+           0.100       0.092        -2573.243      -2574.736
+           0.050       0.050        -2563.928      -2564.029
+           0.020       0.022        -2553.447      -2550.548
+           0.010       0.013        -2546.457      -2539.359
+
+Information Criteria
+
+    Akaike (AIC)
+
+        Mean                              5226.206
+        Std Dev                             51.280
+        Number of successful computations     1000
+
+             Proportions                   Percentiles
+        Expected    Observed         Expected       Observed
+           0.990       0.987         5106.915       5091.816
+           0.980       0.978         5120.893       5114.882
+           0.950       0.950         5141.857       5139.084
+           0.900       0.908         5160.486       5162.579
+           0.800       0.798         5183.050       5182.380
+           0.700       0.704         5199.315       5199.836
+           0.500       0.522         5226.206       5228.792
+           0.300       0.304         5253.098       5253.656
+           0.200       0.190         5269.363       5267.870
+           0.100       0.097         5291.927       5289.087
+           0.050       0.054         5310.556       5312.132
+           0.020       0.015         5331.520       5326.481
+           0.010       0.007         5345.498       5338.244
+
+    Bayesian (BIC)
+
+        Mean                              5258.064
+        Std Dev                             51.280
+        Number of successful computations     1000
+
+             Proportions                   Percentiles
+        Expected    Observed         Expected       Observed
+           0.990       0.987         5138.772       5123.673
+           0.980       0.978         5152.751       5146.740
+           0.950       0.950         5173.714       5170.942
+           0.900       0.908         5192.344       5194.437
+           0.800       0.798         5214.907       5214.237
+           0.700       0.704         5231.173       5231.693
+           0.500       0.522         5258.064       5260.650
+           0.300       0.304         5284.955       5285.513
+           0.200       0.190         5301.221       5299.728
+           0.100       0.097         5323.784       5320.944
+           0.050       0.054         5342.414       5343.990
+           0.020       0.015         5363.377       5358.339
+           0.010       0.007         5377.356       5370.102
+
+    Sample-Size Adjusted BIC (n* = (n + 2) / 24)
+
+        Mean                              5235.838
+        Std Dev                             51.280
+        Number of successful computations     1000
+
+             Proportions                   Percentiles
+        Expected    Observed         Expected       Observed
+           0.990       0.987         5116.546       5101.447
+           0.980       0.978         5130.525       5124.513
+           0.950       0.950         5151.488       5148.715
+           0.900       0.908         5170.118       5172.211
+           0.800       0.798         5192.681       5192.011
+           0.700       0.704         5208.947       5209.467
+           0.500       0.522         5235.838       5238.423
+           0.300       0.304         5262.729       5263.287
+           0.200       0.190         5278.995       5277.501
+           0.100       0.097         5301.558       5298.718
+           0.050       0.054         5320.188       5321.763
+           0.020       0.015         5341.151       5336.113
+           0.010       0.007         5355.130       5347.875
+
+Chi-Square Test of Model Fit
+
+        Degrees of freedom                       0
+
+        Mean                                 0.001
+        Std Dev                              0.011
+        Number of successful computations     1000
+
+             Proportions                   Percentiles
+        Expected    Observed         Expected       Observed
+           0.990       0.013            0.000          0.000
+           0.980       0.013            0.000          0.000
+           0.950       0.013            0.000          0.000
+           0.900       0.013            0.000          0.000
+           0.800       0.013            0.000          0.000
+           0.700       0.013            0.000          0.000
+           0.500       0.013            0.000          0.000
+           0.300       0.013            0.000          0.000
+           0.200       0.013            0.000          0.000
+           0.100       0.013            0.000          0.000
+           0.050       0.013            0.000          0.000
+           0.020       0.013            0.000          0.000
+           0.010       0.013            0.000          0.000
+
+RMSEA (Root Mean Square Error Of Approximation)
+
+        Mean                                 0.000
+        Std Dev                              0.000
+        Number of successful computations     1000
+
+             Proportions                   Percentiles
+        Expected    Observed         Expected       Observed
+           0.990       0.000            0.000          0.000
+           0.980       0.000            0.000          0.000
+           0.950       0.000            0.000          0.000
+           0.900       0.000            0.000          0.000
+           0.800       0.000            0.000          0.000
+           0.700       0.000            0.000          0.000
+           0.500       0.000            0.000          0.000
+           0.300       0.000            0.000          0.000
+           0.200       0.000            0.000          0.000
+           0.100       0.000            0.000          0.000
+           0.050       0.000            0.000          0.000
+           0.020       0.000            0.000          0.000
+           0.010       0.000            0.000          0.000
+
+SRMR (Standardized Root Mean Square Residual) for the WITHIN level
+
+        Mean                                 0.000
+        Std Dev                              0.000
+        Number of successful computations     1000
+
+             Proportions                   Percentiles
+        Expected    Observed         Expected       Observed
+           0.990       1.000            0.000          0.000
+           0.980       1.000            0.000          0.000
+           0.950       1.000            0.000          0.000
+           0.900       1.000            0.000          0.000
+           0.800       1.000            0.000          0.000
+           0.700       0.975            0.000          0.000
+           0.500       0.242            0.000          0.000
+           0.300       0.109            0.000          0.000
+           0.200       0.077            0.000          0.000
+           0.100       0.050            0.000          0.000
+           0.050       0.038            0.000          0.000
+           0.020       0.025            0.000          0.000
+           0.010       0.022            0.000          0.000
+
+SRMR (Standardized Root Mean Square Residual) for the BETWEEN level
+
+        Mean                                 0.000
+        Std Dev                              0.000
+        Number of successful computations     1000
+
+             Proportions                   Percentiles
+        Expected    Observed         Expected       Observed
+           0.990       1.000            0.000          0.000
+           0.980       1.000            0.000          0.000
+           0.950       1.000            0.000          0.000
+           0.900       1.000            0.000          0.000
+           0.800       1.000            0.000          0.000
+           0.700       0.850            0.000          0.000
+           0.500       0.297            0.000          0.000
+           0.300       0.112            0.000          0.000
+           0.200       0.076            0.000          0.000
+           0.100       0.040            0.000          0.000
+           0.050       0.030            0.000          0.000
+           0.020       0.023            0.000          0.000
+           0.010       0.019            0.000          0.001
+
+
+
+MODEL RESULTS
+
+                           ESTIMATES              S. E.     M. S. E.  95%  % Sig
+              Population   Average   Std. Dev.   Average             Cover Coeff
+Within Level
+
+ POST       ON
+  PRE              0.894     0.8941     0.0224     0.0217     0.0005 0.940 1.000
+
+ Residual Variances
+  POST             1.300     1.2964     0.0689     0.0700     0.0048 0.941 1.000
+
+Between Level
+
+ POST       ON
+  PRE              1.000     1.0005     0.0852     0.0756     0.0073 0.910 1.000
+  EST              0.447     0.4459     0.1453     0.1335     0.0211 0.920 0.892
+  MINT             0.447     0.4487     0.1498     0.1338     0.0224 0.918 0.879
+
+ Intercepts
+  POST             0.000    -0.0013     0.1243     0.1158     0.0154 0.909 0.091
+
+ Residual Variances
+  POST             0.100     0.0800     0.0374     0.0341     0.0018 0.803 0.689
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Average Condition Number for the Information Matrix      0.107E-01
+       (ratio of smallest to largest eigenvalue)
+
+
+TECHNICAL 1 OUTPUT
+
+
+     PARAMETER SPECIFICATION FOR WITHIN
+
+
+           NU
+              POST          PRE           EST           MINT
+              ________      ________      ________      ________
+ 1                  0             0             0             0
+
+
+           LAMBDA
+              POST          PRE           EST           MINT
+              ________      ________      ________      ________
+ POST               0             0             0             0
+ PRE                0             0             0             0
+ EST                0             0             0             0
+ MINT               0             0             0             0
+
+
+           THETA
+              POST          PRE           EST           MINT
+              ________      ________      ________      ________
+ POST               0
+ PRE                0             0
+ EST                0             0             0
+ MINT               0             0             0             0
+
+
+           ALPHA
+              POST          PRE           EST           MINT
+              ________      ________      ________      ________
+ 1                  0             0             0             0
+
+
+           BETA
+              POST          PRE           EST           MINT
+              ________      ________      ________      ________
+ POST               0             1             0             0
+ PRE                0             0             0             0
+ EST                0             0             0             0
+ MINT               0             0             0             0
+
+
+           PSI
+              POST          PRE           EST           MINT
+              ________      ________      ________      ________
+ POST               2
+ PRE                0             0
+ EST                0             0             0
+ MINT               0             0             0             0
+
+
+     PARAMETER SPECIFICATION FOR BETWEEN
+
+
+           NU
+              POST          PRE           EST           MINT
+              ________      ________      ________      ________
+ 1                  0             0             0             0
+
+
+           LAMBDA
+              POST          PRE           EST           MINT
+              ________      ________      ________      ________
+ POST               0             0             0             0
+ PRE                0             0             0             0
+ EST                0             0             0             0
+ MINT               0             0             0             0
+
+
+           THETA
+              POST          PRE           EST           MINT
+              ________      ________      ________      ________
+ POST               0
+ PRE                0             0
+ EST                0             0             0
+ MINT               0             0             0             0
+
+
+           ALPHA
+              POST          PRE           EST           MINT
+              ________      ________      ________      ________
+ 1                  3             0             0             0
+
+
+           BETA
+              POST          PRE           EST           MINT
+              ________      ________      ________      ________
+ POST               0             4             5             6
+ PRE                0             0             0             0
+ EST                0             0             0             0
+ MINT               0             0             0             0
+
+
+           PSI
+              POST          PRE           EST           MINT
+              ________      ________      ________      ________
+ POST               7
+ PRE                0             0
+ EST                0             0             0
+ MINT               0             0             0             0
+
+
+     STARTING VALUES FOR WITHIN
+
+
+           NU
+              POST          PRE           EST           MINT
+              ________      ________      ________      ________
+ 1              0.000         0.000         0.000         0.000
+
+
+           LAMBDA
+              POST          PRE           EST           MINT
+              ________      ________      ________      ________
+ POST           1.000         0.000         0.000         0.000
+ PRE            0.000         1.000         0.000         0.000
+ EST            0.000         0.000         1.000         0.000
+ MINT           0.000         0.000         0.000         1.000
+
+
+           THETA
+              POST          PRE           EST           MINT
+              ________      ________      ________      ________
+ POST           0.000
+ PRE            0.000         0.000
+ EST            0.000         0.000         0.000
+ MINT           0.000         0.000         0.000         0.000
+
+
+           ALPHA
+              POST          PRE           EST           MINT
+              ________      ________      ________      ________
+ 1              0.000         0.000         0.000         0.000
+
+
+           BETA
+              POST          PRE           EST           MINT
+              ________      ________      ________      ________
+ POST           0.000         0.894         0.000         0.000
+ PRE            0.000         0.000         0.000         0.000
+ EST            0.000         0.000         0.000         0.000
+ MINT           0.000         0.000         0.000         0.000
+
+
+           PSI
+              POST          PRE           EST           MINT
+              ________      ________      ________      ________
+ POST           1.300
+ PRE            0.000         0.500
+ EST            0.000         0.000         0.000
+ MINT           0.000         0.000         0.000         0.000
+
+
+     STARTING VALUES FOR BETWEEN
+
+
+           NU
+              POST          PRE           EST           MINT
+              ________      ________      ________      ________
+ 1              0.000         0.000         0.000         0.000
+
+
+           LAMBDA
+              POST          PRE           EST           MINT
+              ________      ________      ________      ________
+ POST           1.000         0.000         0.000         0.000
+ PRE            0.000         1.000         0.000         0.000
+ EST            0.000         0.000         1.000         0.000
+ MINT           0.000         0.000         0.000         1.000
+
+
+           THETA
+              POST          PRE           EST           MINT
+              ________      ________      ________      ________
+ POST           0.000
+ PRE            0.000         0.000
+ EST            0.000         0.000         0.000
+ MINT           0.000         0.000         0.000         0.000
+
+
+           ALPHA
+              POST          PRE           EST           MINT
+              ________      ________      ________      ________
+ 1              0.000         0.000         0.000         0.000
+
+
+           BETA
+              POST          PRE           EST           MINT
+              ________      ________      ________      ________
+ POST           0.000         1.000         0.447         0.447
+ PRE            0.000         0.000         0.000         0.000
+ EST            0.000         0.000         0.000         0.000
+ MINT           0.000         0.000         0.000         0.000
+
+
+           PSI
+              POST          PRE           EST           MINT
+              ________      ________      ________      ________
+ POST           0.100
+ PRE            0.000         0.500
+ EST            0.000         0.000         0.500
+ MINT           0.000         0.000         0.000         0.500
+
+
+     POPULATION VALUES FOR WITHIN
+
+
+           NU
+              POST          PRE           EST           MINT
+              ________      ________      ________      ________
+ 1              0.000         0.000         0.000         0.000
+
+
+           LAMBDA
+              POST          PRE           EST           MINT
+              ________      ________      ________      ________
+ POST           1.000         0.000         0.000         0.000
+ PRE            0.000         1.000         0.000         0.000
+ EST            0.000         0.000         1.000         0.000
+ MINT           0.000         0.000         0.000         1.000
+
+
+           THETA
+              POST          PRE           EST           MINT
+              ________      ________      ________      ________
+ POST           0.000
+ PRE            0.000         0.000
+ EST            0.000         0.000         0.000
+ MINT           0.000         0.000         0.000         0.000
+
+
+           ALPHA
+              POST          PRE           EST           MINT
+              ________      ________      ________      ________
+ 1              0.000         0.000         0.000         0.000
+
+
+           BETA
+              POST          PRE           EST           MINT
+              ________      ________      ________      ________
+ POST           0.000         0.894         0.000         0.000
+ PRE            0.000         0.000         0.000         0.000
+ EST            0.000         0.000         0.000         0.000
+ MINT           0.000         0.000         0.000         0.000
+
+
+           PSI
+              POST          PRE           EST           MINT
+              ________      ________      ________      ________
+ POST           1.300
+ PRE            0.000         4.000
+ EST            0.000         0.000         0.000
+ MINT           0.000         0.000         0.000         0.000
+
+
+     POPULATION VALUES FOR BETWEEN
+
+
+           NU
+              POST          PRE           EST           MINT
+              ________      ________      ________      ________
+ 1              0.000         0.000         0.000         0.000
+
+
+           LAMBDA
+              POST          PRE           EST           MINT
+              ________      ________      ________      ________
+ POST           1.000         0.000         0.000         0.000
+ PRE            0.000         1.000         0.000         0.000
+ EST            0.000         0.000         1.000         0.000
+ MINT           0.000         0.000         0.000         1.000
+
+
+           THETA
+              POST          PRE           EST           MINT
+              ________      ________      ________      ________
+ POST           0.000
+ PRE            0.000         0.000
+ EST            0.000         0.000         0.000
+ MINT           0.000         0.000         0.000         0.000
+
+
+           ALPHA
+              POST          PRE           EST           MINT
+              ________      ________      ________      ________
+ 1              0.000         0.000         0.500         0.500
+
+
+           BETA
+              POST          PRE           EST           MINT
+              ________      ________      ________      ________
+ POST           0.000         1.000         0.447         0.447
+ PRE            0.000         0.000         0.000         0.000
+ EST            0.000         0.000         0.000         0.000
+ MINT           0.000         0.000         0.000         0.000
+
+
+           PSI
+              POST          PRE           EST           MINT
+              ________      ________      ________      ________
+ POST           0.100
+ PRE            0.000         1.000
+ EST            0.000         0.000         0.250
+ MINT           0.000         0.000         0.000         0.250
+
+
+TECHNICAL 9 OUTPUT
+
+  Error messages for each replication (if any)
+
+
+
+SAVEDATA INFORMATION
+
+  Order of variables
+
+    POST
+    PRE
+    EST
+    MINT
+    PATTERN
+    CLUSTER
+
+  Save file
+    MCTransfer_*.dat
+
+  Save file format           Free
+  Save file record length    10000
+  Missing designated by 999
+
+
+DIAGRAM INFORMATION
+
+  Mplus diagrams are currently not available for multilevel analysis.
+  No diagram output was produced.
+
+
+     Beginning Time:  14:09:58
+        Ending Time:  14:10:33
+       Elapsed Time:  00:00:35
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2013 Muthen & Muthen

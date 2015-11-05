@@ -1,0 +1,64 @@
+TITLE:	Monte Carlo Simulation
+for Transfer Effect
+of Intervention on Complex Problem Solving
+Assumptions:
+- Intraclass correlation coefficient = .20
+- Pretest explains 89% of between classroom variance at posttest
+- Intervention explains 10% of between classroom variance at posttest
+- 10% between classroom variance left at posttest
+- 5% Missing data on posttest
+
+montecarlo:
+		names are post pre est mint;
+		nobservations = 1200;
+		ncsizes = 3;
+		csizes = 20 (15) 20 (20) 20 (25);! 1000 (100) 1880 (10);
+        cutpoints = est (.5) mint (.5);
+        PATMISS = post (.05);
+		PATPROBS = 1;
+        seed = 666;
+		nreps = 1000;
+        between = est mint;
+		save = MCTransfer_*.dat;
+        repsave = all;
+
+!DEFINE:
+!        int = est*mint;
+
+ANALYSIS:   TYPE = TWOLEVEL;
+            ESTIMATOR = MLR;
+
+model population:
+		
+        %within%
+        post*1.44;
+        pre*4;
+        post ON pre*.8;        
+
+        %between%
+        post*.10;
+        pre*1;
+        [est*.5];
+        est*.25;
+        [mint*.5];
+        mint*.25;
+        post ON pre*1 est*.447 mint*.447;
+        		
+model:
+
+        %within%
+        post*1.44;
+
+        post ON pre*.8;
+
+        %between%
+        post*.10;
+
+
+
+        post ON pre*1 est*.447 mint*.447;
+
+
+
+output:
+		tech9;

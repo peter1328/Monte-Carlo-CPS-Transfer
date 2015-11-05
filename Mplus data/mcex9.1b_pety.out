@@ -1,0 +1,779 @@
+Mplus VERSION 7.11
+MUTHEN & MUTHEN
+02/25/2015  10:08 PM
+
+INPUT INSTRUCTIONS
+
+  TITLE:	this is an example of a two-level
+  		regression analysis for a continuous
+  		dependent variable
+
+  montecarlo:
+  		names are y x w;
+  		nobservations = 1200;
+  		ncsizes = 3;
+  		csizes = 20 (15) 20 (20) 20 (25);
+  		seed = 666;
+  		nreps = 100;
+  !		within = x;
+          between = w;
+  		save = ex9.1b.dat;
+
+  ANALYSIS:  TYPE = TWOLEVEL;
+
+  model population:
+  		%within%
+  		x@1;
+  		y on x*.75;
+  		y*1;
+  		%between%
+          [w@0]; w@1;
+  		[x@0]; x@.5;
+          w with x@.5;
+  		y on w*.5 x*1;
+  		[y*2];
+  		y*.5;
+  		
+  model:
+          %within%
+  	
+  		y on x*.75 (gamma10);
+  		y*1;
+  		%between%
+
+  		y on w*.5
+              x*1 (gamma01);
+  		[y*2];
+  		y*.5;
+
+  model constraint:
+          new(betac*.25);
+          betac = gamma01 - gamma10;
+
+  output:
+  		tech9;
+
+
+
+INPUT READING TERMINATED NORMALLY
+
+
+
+this is an example of a two-level
+regression analysis for a continuous
+dependent variable
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                        1200
+
+Number of replications
+    Requested                                                  100
+    Completed                                                  100
+Value of seed                                                  666
+
+Number of dependent variables                                    1
+Number of independent variables                                  2
+Number of continuous latent variables                            0
+
+Observed dependent variables
+
+  Continuous
+   Y
+
+Observed independent variables
+   X           W
+
+Variables with special functions
+
+  Between variables
+   W
+
+
+Estimator                                                      MLR
+Information matrix                                        OBSERVED
+Maximum number of iterations                                   100
+Convergence criterion                                    0.100D-05
+Maximum number of EM iterations                                500
+Convergence criteria for the EM algorithm
+  Loglikelihood change                                   0.100D-02
+  Relative loglikelihood change                          0.100D-05
+  Derivative                                             0.100D-03
+Minimum variance                                         0.100D-03
+Maximum number of steepest descent iterations                   20
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Optimization algorithm                                         EMA
+
+
+SUMMARY OF DATA FOR THE FIRST REPLICATION
+
+     Cluster information
+
+       Size (s)    Number of clusters of Size s
+
+         15            20
+         20            20
+         25            20
+
+     Average cluster size       20.000
+
+     Estimated Intraclass Correlations for the Y Variables
+
+                Intraclass
+     Variable  Correlation
+
+     Y            0.465
+
+
+SAMPLE STATISTICS FOR THE FIRST REPLICATION
+
+NOTE:  The sample statistics for within and between refer to the
+       maximum-likelihood estimated within and between covariance
+       matrices, respectively.
+
+
+     ESTIMATED SAMPLE STATISTICS FOR WITHIN
+
+
+           Means
+              Y             X             W
+              ________      ________      ________
+ 1              0.000         0.000         0.000
+
+
+           Covariances
+              Y             X             W
+              ________      ________      ________
+ Y              1.576
+ X              0.765         0.948
+ W              0.000         0.000         0.000
+
+
+           Correlations
+              Y             X             W
+              ________      ________      ________
+ Y              1.000
+ X              0.626         1.000
+ W              0.000         0.000         0.000
+
+
+     ESTIMATED SAMPLE STATISTICS FOR BETWEEN
+
+
+           Means
+              Y             X             W
+              ________      ________      ________
+ 1              2.397         0.280         0.331
+
+
+           Covariances
+              Y             X             W
+              ________      ________      ________
+ Y              1.371
+ X              0.699         0.511
+ W              0.910         0.576         0.974
+
+
+           Correlations
+              Y             X             W
+              ________      ________      ________
+ Y              1.000
+ X              0.835         1.000
+ W              0.787         0.817         1.000
+
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                        6
+
+Loglikelihood
+
+    H0 Value
+
+        Mean                             -3524.658
+        Std Dev                             35.312
+        Number of successful computations      100
+
+             Proportions                   Percentiles
+        Expected    Observed         Expected       Observed
+           0.990       0.990        -3606.804      -3613.245
+           0.980       0.980        -3597.178      -3602.518
+           0.950       0.950        -3582.743      -3585.334
+           0.900       0.910        -3569.914      -3570.259
+           0.800       0.790        -3554.376      -3556.541
+           0.700       0.730        -3543.175      -3541.981
+           0.500       0.470        -3524.658      -3528.290
+           0.300       0.310        -3506.140      -3506.093
+           0.200       0.190        -3494.939      -3497.807
+           0.100       0.090        -3479.401      -3480.740
+           0.050       0.060        -3466.572      -3465.045
+           0.020       0.020        -3452.137      -3458.291
+           0.010       0.020        -3442.511      -3430.916
+
+    H1 Value
+
+        Mean                             -3524.657
+        Std Dev                             35.312
+        Number of successful computations      100
+
+             Proportions                   Percentiles
+        Expected    Observed         Expected       Observed
+           0.990       0.990        -3606.804      -3613.245
+           0.980       0.980        -3597.178      -3602.518
+           0.950       0.950        -3582.743      -3585.334
+           0.900       0.910        -3569.914      -3570.259
+           0.800       0.790        -3554.376      -3556.541
+           0.700       0.730        -3543.175      -3541.981
+           0.500       0.470        -3524.657      -3528.290
+           0.300       0.310        -3506.140      -3506.093
+           0.200       0.190        -3494.939      -3497.807
+           0.100       0.090        -3479.401      -3480.740
+           0.050       0.060        -3466.572      -3465.045
+           0.020       0.020        -3452.137      -3458.291
+           0.010       0.020        -3442.511      -3430.915
+
+Information Criteria
+
+    Akaike (AIC)
+
+        Mean                              7061.315
+        Std Dev                             70.625
+        Number of successful computations      100
+
+             Proportions                   Percentiles
+        Expected    Observed         Expected       Observed
+           0.990       0.980         6897.021       6861.589
+           0.980       0.980         6916.274       6873.831
+           0.950       0.940         6945.145       6938.598
+           0.900       0.910         6970.803       6964.767
+           0.800       0.810         7001.877       7000.560
+           0.700       0.690         7024.280       7023.974
+           0.500       0.530         7061.315       7068.274
+           0.300       0.270         7098.351       7095.785
+           0.200       0.210         7120.753       7123.498
+           0.100       0.090         7151.827       7144.190
+           0.050       0.050         7177.485       7173.947
+           0.020       0.020         7206.357       7199.987
+           0.010       0.010         7225.609       7217.036
+
+    Bayesian (BIC)
+
+        Mean                              7091.856
+        Std Dev                             70.625
+        Number of successful computations      100
+
+             Proportions                   Percentiles
+        Expected    Observed         Expected       Observed
+           0.990       0.980         6927.562       6892.129
+           0.980       0.980         6946.814       6904.372
+           0.950       0.940         6975.685       6969.139
+           0.900       0.910         7001.343       6995.307
+           0.800       0.810         7032.418       7031.100
+           0.700       0.690         7054.820       7054.515
+           0.500       0.530         7091.856       7098.815
+           0.300       0.270         7128.891       7126.326
+           0.200       0.210         7151.293       7154.038
+           0.100       0.090         7182.368       7174.731
+           0.050       0.050         7208.026       7204.488
+           0.020       0.020         7236.897       7230.527
+           0.010       0.010         7256.149       7247.576
+
+    Sample-Size Adjusted BIC (n* = (n + 2) / 24)
+
+        Mean                              7072.797
+        Std Dev                             70.625
+        Number of successful computations      100
+
+             Proportions                   Percentiles
+        Expected    Observed         Expected       Observed
+           0.990       0.980         6908.503       6873.071
+           0.980       0.980         6927.756       6885.313
+           0.950       0.940         6956.627       6950.080
+           0.900       0.910         6982.285       6976.249
+           0.800       0.810         7013.360       7012.042
+           0.700       0.690         7035.762       7035.457
+           0.500       0.530         7072.797       7079.756
+           0.300       0.270         7109.833       7107.268
+           0.200       0.210         7132.235       7134.980
+           0.100       0.090         7163.310       7155.672
+           0.050       0.050         7188.967       7185.429
+           0.020       0.020         7217.839       7211.469
+           0.010       0.010         7237.091       7228.518
+
+Chi-Square Test of Model Fit
+
+        Degrees of freedom                       0
+
+        Mean                                 0.000
+        Std Dev                              0.000
+        Number of successful computations      100
+
+             Proportions                   Percentiles
+        Expected    Observed         Expected       Observed
+           0.990       1.000            0.000          0.000
+           0.980       1.000            0.000          0.000
+           0.950       1.000            0.000          0.000
+           0.900       1.000            0.000          0.000
+           0.800       1.000            0.000          0.000
+           0.700       1.000            0.000          0.000
+           0.500       1.000            0.000          0.000
+           0.300       1.000            0.000          0.000
+           0.200       1.000            0.000          0.000
+           0.100       1.000            0.000          0.000
+           0.050       1.000            0.000          0.000
+           0.020       1.000            0.000          0.000
+           0.010       1.000            0.000          0.001
+
+RMSEA (Root Mean Square Error Of Approximation)
+
+        Mean                                 0.000
+        Std Dev                              0.000
+        Number of successful computations      100
+
+             Proportions                   Percentiles
+        Expected    Observed         Expected       Observed
+           0.990       0.000            0.000          0.000
+           0.980       0.000            0.000          0.000
+           0.950       0.000            0.000          0.000
+           0.900       0.000            0.000          0.000
+           0.800       0.000            0.000          0.000
+           0.700       0.000            0.000          0.000
+           0.500       0.000            0.000          0.000
+           0.300       0.000            0.000          0.000
+           0.200       0.000            0.000          0.000
+           0.100       0.000            0.000          0.000
+           0.050       0.000            0.000          0.000
+           0.020       0.000            0.000          0.000
+           0.010       0.000            0.000          0.000
+
+SRMR (Standardized Root Mean Square Residual) for the WITHIN level
+
+        Mean                                 0.000
+        Std Dev                              0.000
+        Number of successful computations      100
+
+             Proportions                   Percentiles
+        Expected    Observed         Expected       Observed
+           0.990       1.000            0.000          0.000
+           0.980       1.000            0.000          0.000
+           0.950       1.000            0.000          0.000
+           0.900       1.000            0.000          0.000
+           0.800       0.770            0.000          0.000
+           0.700       0.600            0.000          0.000
+           0.500       0.440            0.000          0.000
+           0.300       0.280            0.000          0.000
+           0.200       0.180            0.000          0.000
+           0.100       0.120            0.000          0.000
+           0.050       0.060            0.000          0.000
+           0.020       0.040            0.000          0.000
+           0.010       0.020            0.000          0.000
+
+SRMR (Standardized Root Mean Square Residual) for the BETWEEN level
+
+        Mean                                 0.000
+        Std Dev                              0.000
+        Number of successful computations      100
+
+             Proportions                   Percentiles
+        Expected    Observed         Expected       Observed
+           0.990       1.000            0.000          0.000
+           0.980       1.000            0.000          0.000
+           0.950       1.000            0.000          0.000
+           0.900       0.980            0.000          0.000
+           0.800       0.760            0.000          0.000
+           0.700       0.570            0.000          0.000
+           0.500       0.450            0.000          0.000
+           0.300       0.280            0.000          0.000
+           0.200       0.210            0.000          0.000
+           0.100       0.110            0.000          0.000
+           0.050       0.100            0.000          0.000
+           0.020       0.060            0.000          0.000
+           0.010       0.020            0.000          0.000
+
+
+
+MODEL RESULTS
+
+                           ESTIMATES              S. E.     M. S. E.  95%  % Sig
+              Population   Average   Std. Dev.   Average             Cover Coeff
+Within Level
+
+ Y          ON
+  X                0.750     0.7427     0.0294     0.0296     0.0009 0.960 1.000
+
+ Residual Variances
+  Y                1.000     0.9979     0.0451     0.0418     0.0020 0.930 1.000
+
+Between Level
+
+ Y          ON
+  W                0.500     0.5046     0.1447     0.1437     0.0207 0.930 0.920
+  X                1.000     1.0124     0.2094     0.2130     0.0436 0.950 1.000
+
+ Intercepts
+  Y                2.000     1.9998     0.0902     0.0953     0.0081 0.960 1.000
+
+ Residual Variances
+  Y                0.500     0.4720     0.0959     0.0927     0.0099 0.860 1.000
+
+ New/Additional Parameters
+  BETAC            0.250     0.2697     0.2115     0.2160     0.0447 0.960 0.260
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Average Condition Number for the Information Matrix      0.776E-03
+       (ratio of smallest to largest eigenvalue)
+
+
+TECHNICAL 1 OUTPUT
+
+
+     PARAMETER SPECIFICATION FOR WITHIN
+
+
+           NU
+              Y             X             W
+              ________      ________      ________
+ 1                  0             0             0
+
+
+           LAMBDA
+              Y             X             W
+              ________      ________      ________
+ Y                  0             0             0
+ X                  0             0             0
+ W                  0             0             0
+
+
+           THETA
+              Y             X             W
+              ________      ________      ________
+ Y                  0
+ X                  0             0
+ W                  0             0             0
+
+
+           ALPHA
+              Y             X             W
+              ________      ________      ________
+ 1                  0             0             0
+
+
+           BETA
+              Y             X             W
+              ________      ________      ________
+ Y                  0             1             0
+ X                  0             0             0
+ W                  0             0             0
+
+
+           PSI
+              Y             X             W
+              ________      ________      ________
+ Y                  2
+ X                  0             0
+ W                  0             0             0
+
+
+     PARAMETER SPECIFICATION FOR BETWEEN
+
+
+           NU
+              Y             X             W
+              ________      ________      ________
+ 1                  0             0             0
+
+
+           LAMBDA
+              Y             X             W
+              ________      ________      ________
+ Y                  0             0             0
+ X                  0             0             0
+ W                  0             0             0
+
+
+           THETA
+              Y             X             W
+              ________      ________      ________
+ Y                  0
+ X                  0             0
+ W                  0             0             0
+
+
+           ALPHA
+              Y             X             W
+              ________      ________      ________
+ 1                  3             0             0
+
+
+           BETA
+              Y             X             W
+              ________      ________      ________
+ Y                  0             4             5
+ X                  0             0             0
+ W                  0             0             0
+
+
+           PSI
+              Y             X             W
+              ________      ________      ________
+ Y                  6
+ X                  0             0
+ W                  0             0             0
+
+
+     PARAMETER SPECIFICATION FOR THE ADDITIONAL PARAMETERS
+
+
+           NEW/ADDITIONAL PARAMETERS
+              BETAC
+              ________
+ 1                  7
+
+
+     STARTING VALUES FOR WITHIN
+
+
+           NU
+              Y             X             W
+              ________      ________      ________
+ 1              0.000         0.000         0.000
+
+
+           LAMBDA
+              Y             X             W
+              ________      ________      ________
+ Y              1.000         0.000         0.000
+ X              0.000         1.000         0.000
+ W              0.000         0.000         1.000
+
+
+           THETA
+              Y             X             W
+              ________      ________      ________
+ Y              0.000
+ X              0.000         0.000
+ W              0.000         0.000         0.000
+
+
+           ALPHA
+              Y             X             W
+              ________      ________      ________
+ 1              0.000         0.000         0.000
+
+
+           BETA
+              Y             X             W
+              ________      ________      ________
+ Y              0.000         0.750         0.000
+ X              0.000         0.000         0.000
+ W              0.000         0.000         0.000
+
+
+           PSI
+              Y             X             W
+              ________      ________      ________
+ Y              1.000
+ X              0.000         0.500
+ W              0.000         0.000         0.000
+
+
+     STARTING VALUES FOR BETWEEN
+
+
+           NU
+              Y             X             W
+              ________      ________      ________
+ 1              0.000         0.000         0.000
+
+
+           LAMBDA
+              Y             X             W
+              ________      ________      ________
+ Y              1.000         0.000         0.000
+ X              0.000         1.000         0.000
+ W              0.000         0.000         1.000
+
+
+           THETA
+              Y             X             W
+              ________      ________      ________
+ Y              0.000
+ X              0.000         0.000
+ W              0.000         0.000         0.000
+
+
+           ALPHA
+              Y             X             W
+              ________      ________      ________
+ 1              2.000         0.000         0.000
+
+
+           BETA
+              Y             X             W
+              ________      ________      ________
+ Y              0.000         1.000         0.500
+ X              0.000         0.000         0.000
+ W              0.000         0.000         0.000
+
+
+           PSI
+              Y             X             W
+              ________      ________      ________
+ Y              0.500
+ X              0.000         0.500
+ W              0.000         0.000         0.500
+
+
+     STARTING VALUES FOR THE ADDITIONAL PARAMETERS
+
+
+           NEW/ADDITIONAL PARAMETERS
+              BETAC
+              ________
+ 1              0.250
+
+
+     POPULATION VALUES FOR WITHIN
+
+
+           NU
+              Y             X             W
+              ________      ________      ________
+ 1              0.000         0.000         0.000
+
+
+           LAMBDA
+              Y             X             W
+              ________      ________      ________
+ Y              1.000         0.000         0.000
+ X              0.000         1.000         0.000
+ W              0.000         0.000         1.000
+
+
+           THETA
+              Y             X             W
+              ________      ________      ________
+ Y              0.000
+ X              0.000         0.000
+ W              0.000         0.000         0.000
+
+
+           ALPHA
+              Y             X             W
+              ________      ________      ________
+ 1              0.000         0.000         0.000
+
+
+           BETA
+              Y             X             W
+              ________      ________      ________
+ Y              0.000         0.750         0.000
+ X              0.000         0.000         0.000
+ W              0.000         0.000         0.000
+
+
+           PSI
+              Y             X             W
+              ________      ________      ________
+ Y              1.000
+ X              0.000         1.000
+ W              0.000         0.000         0.000
+
+
+     POPULATION VALUES FOR BETWEEN
+
+
+           NU
+              Y             X             W
+              ________      ________      ________
+ 1              0.000         0.000         0.000
+
+
+           LAMBDA
+              Y             X             W
+              ________      ________      ________
+ Y              1.000         0.000         0.000
+ X              0.000         1.000         0.000
+ W              0.000         0.000         1.000
+
+
+           THETA
+              Y             X             W
+              ________      ________      ________
+ Y              0.000
+ X              0.000         0.000
+ W              0.000         0.000         0.000
+
+
+           ALPHA
+              Y             X             W
+              ________      ________      ________
+ 1              2.000         0.000         0.000
+
+
+           BETA
+              Y             X             W
+              ________      ________      ________
+ Y              0.000         1.000         0.500
+ X              0.000         0.000         0.000
+ W              0.000         0.000         0.000
+
+
+           PSI
+              Y             X             W
+              ________      ________      ________
+ Y              0.500
+ X              0.000         0.500
+ W              0.000         0.500         1.000
+
+
+TECHNICAL 9 OUTPUT
+
+  Error messages for each replication (if any)
+
+
+
+SAVEDATA INFORMATION
+
+  Order of variables
+
+    Y
+    X
+    W
+    CLUSTER
+
+  Save file
+    ex9.1b.dat
+
+  Save file format           Free
+  Save file record length    10000
+
+
+DIAGRAM INFORMATION
+
+  Mplus diagrams are currently not available for multilevel analysis.
+  No diagram output was produced.
+
+
+     Beginning Time:  22:08:49
+        Ending Time:  22:08:50
+       Elapsed Time:  00:00:01
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2013 Muthen & Muthen

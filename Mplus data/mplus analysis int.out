@@ -1,0 +1,55 @@
+Mplus VERSION 7.11
+MUTHEN & MUTHEN
+11/01/2015  10:23 PM
+
+INPUT INSTRUCTIONS
+
+  TITLE:
+
+  DATA:
+
+  FILE IS 'MCTransfer_1.dat';
+
+  VARIABLE:
+
+  NAMES ARE post pre est mint sample class;
+  USEVARIABLES ARE post pre est mint;
+
+  cluster = class;
+  between = est mint int;
+
+
+
+  DEFINE:
+  int = est*mint;
+
+  ANALYSIS: TYPE IS TWOLEVEL;
+
+  MODEL:
+
+  %within%
+
+  post ON pre;
+
+  %between%
+
+  post ON pre est mint int;
+
+  OUTPUT:
+  stdyx residual tech1 tech7 tech8 tech9 tech11 tech14;
+
+*** ERROR in VARIABLE command
+  Unknown variable(s) in BETWEEN option:
+  int
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2013 Muthen & Muthen

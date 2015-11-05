@@ -1,0 +1,78 @@
+TITLE:	this is an example of a two-level 
+		regression analysis for a continuous 
+		dependent variable
+
+montecarlo:
+		names are post pre;! int1;! int2;
+		nobservations = 12000;
+		ncsizes = 5;
+		csizes = 20 (15) 20 (20) 20 (25) 100 (100) 8 (100);
+        !ncsizes = 2;
+        !csizes = 30 (15) 30 (25);
+        !cutpoints = int1 (0.5);
+		seed = 666;
+		nreps = 1;
+		!within = x;
+        !between = int1;! int2;
+		save = variancetest.dat;
+
+ANALYSIS:  TYPE = TWOLEVEL;
+
+model population:
+		
+        %within%
+        post*1.44;
+        pre*4;
+        post ON pre*0.8;        
+
+        %between%
+        post*.2;
+        pre*1;
+        post ON pre*.894;
+        
+        
+        !%within%
+		![pre@0];
+        !pre@1;
+		!post on pre*1.6; !
+		!post*.36;
+		!%between%
+        ![pre@0];
+        !pre@1;
+        ![int1@.5];
+        !int1*.25;
+		![int2@0]; int2@.5;
+        !int1 with int2@.5;
+		!post on pre*.4 int1*.20;! int2*.4;
+		![post*0];
+		!post*0; 
+		
+model:
+
+        %within%
+        post*1.44;
+        !pre*4;
+        post ON pre*0.8;
+
+        %between%
+        post*.2;
+        pre*1;
+        post ON pre*.894;
+
+        !%within%
+	    
+		!post on pre*1.6 (gamma10);
+		!post*.36;
+		
+        !%between%
+		!post on pre*.4 int1*.20;! int2*.4;
+        !    pre*1 (gamma01);
+		![post*0];
+		!post*.0;
+        
+        !model constraint:
+        !new(betac*.25);
+        !betac = gamma01 - gamma10; 
+
+output:
+		tech9;

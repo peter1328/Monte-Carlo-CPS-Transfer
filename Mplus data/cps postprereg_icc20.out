@@ -1,0 +1,756 @@
+Mplus VERSION 7.11
+MUTHEN & MUTHEN
+02/26/2015   1:50 PM
+
+INPUT INSTRUCTIONS
+
+  TITLE:	this is an example of a two-level
+  		regression analysis for a continuous
+  		dependent variable
+
+  montecarlo:
+  		names are post pre;! int1;! int2;
+  		nobservations = 12000;
+  		ncsizes = 5;
+  		csizes = 20 (15) 20 (20) 20 (25) 100 (100) 8 (100);
+          !ncsizes = 2;
+          !csizes = 30 (15) 30 (25);
+          !cutpoints = int1 (0.5);
+  		seed = 666;
+  		nreps = 1;
+  		!within = x;
+          !between = int1;! int2;
+  		save = variancetest.dat;
+
+  ANALYSIS:  TYPE = TWOLEVEL;
+
+  model population:
+  		
+          %within%
+          post*1.44;
+          pre*4;
+          post ON pre*0.8;
+
+          %between%
+          post*1;
+          pre*1;
+          !post ON pre*
+
+
+          !%within%
+  		![pre@0];
+          !pre@1;
+  		!post on pre*1.6; !
+  		!post*.36;
+  		!%between%
+          ![pre@0];
+          !pre@1;
+          ![int1@.5];
+          !int1*.25;
+  		![int2@0]; int2@.5;
+          !int1 with int2@.5;
+  		!post on pre*.4 int1*.20;! int2*.4;
+  		![post*0];
+  		!post*0;
+  		
+  model:
+
+          %within%
+          post*1.44;
+          !pre*4;
+          post ON pre*0.8;
+
+          %between%
+          post*1;
+          pre*1;
+
+          !%within%
+  	
+  		!post on pre*1.6 (gamma10);
+  		!post*.36;
+  		
+          !%between%
+  		!post on pre*.4 int1*.20;! int2*.4;
+          !    pre*1 (gamma01);
+  		![post*0];
+  		!post*.0;
+
+          !model constraint:
+          !new(betac*.25);
+          !betac = gamma01 - gamma10;
+
+  output:
+  		tech9;
+
+
+
+INPUT READING TERMINATED NORMALLY
+
+
+
+this is an example of a two-level
+regression analysis for a continuous
+dependent variable
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                       12000
+
+Number of replications
+    Requested                                                    1
+    Completed                                                    1
+Value of seed                                                  666
+
+Number of dependent variables                                    1
+Number of independent variables                                  1
+Number of continuous latent variables                            0
+
+Observed dependent variables
+
+  Continuous
+   POST
+
+Observed independent variables
+   PRE
+
+
+Estimator                                                      MLR
+Information matrix                                        OBSERVED
+Maximum number of iterations                                   100
+Convergence criterion                                    0.100D-05
+Maximum number of EM iterations                                500
+Convergence criteria for the EM algorithm
+  Loglikelihood change                                   0.100D-02
+  Relative loglikelihood change                          0.100D-05
+  Derivative                                             0.100D-03
+Minimum variance                                         0.100D-03
+Maximum number of steepest descent iterations                   20
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Optimization algorithm                                         EMA
+
+
+SUMMARY OF DATA FOR THE FIRST REPLICATION
+
+     Cluster information
+
+       Size (s)    Number of clusters of Size s
+
+         15            20
+         20            20
+         25            20
+        100           100
+        100             8
+
+     Average cluster size       71.429
+
+     Estimated Intraclass Correlations for the Y Variables
+
+                Intraclass              Intraclass
+     Variable  Correlation   Variable  Correlation
+
+     POST         0.220      PRE          0.204
+
+
+SAMPLE STATISTICS FOR THE FIRST REPLICATION
+
+NOTE:  The sample statistics for within and between refer to the
+       maximum-likelihood estimated within and between covariance
+       matrices, respectively.
+
+
+     ESTIMATED SAMPLE STATISTICS FOR WITHIN
+
+
+           Means
+              POST          PRE
+              ________      ________
+ 1              0.000         0.000
+
+
+           Covariances
+              POST          PRE
+              ________      ________
+ POST           4.024
+ PRE            3.254         4.052
+
+
+           Correlations
+              POST          PRE
+              ________      ________
+ POST           1.000
+ PRE            0.806         1.000
+
+
+     ESTIMATED SAMPLE STATISTICS FOR BETWEEN
+
+
+           Means
+              POST          PRE
+              ________      ________
+ 1              0.089        -0.012
+
+
+           Covariances
+              POST          PRE
+              ________      ________
+ POST           1.134
+ PRE           -0.078         1.041
+
+
+           Correlations
+              POST          PRE
+              ________      ________
+ POST           1.000
+ PRE           -0.071         1.000
+
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                        7
+
+Loglikelihood
+
+    H0 Value
+
+        Mean                            -45066.303
+        Std Dev                              0.000
+        Number of successful computations        1
+
+             Proportions                   Percentiles
+        Expected    Observed         Expected       Observed
+           0.990       0.000       -45066.303     -45066.303
+           0.980       0.000       -45066.303     -45066.303
+           0.950       0.000       -45066.303     -45066.303
+           0.900       0.000       -45066.303     -45066.303
+           0.800       0.000       -45066.303     -45066.303
+           0.700       0.000       -45066.303     -45066.303
+           0.500       0.000       -45066.303     -45066.303
+           0.300       0.000       -45066.303     -45066.303
+           0.200       0.000       -45066.303     -45066.303
+           0.100       0.000       -45066.303     -45066.303
+           0.050       0.000       -45066.303     -45066.303
+           0.020       0.000       -45066.303     -45066.303
+           0.010       0.000       -45066.303     -45066.303
+
+    H1 Value
+
+        Mean                            -45065.943
+        Std Dev                              0.000
+        Number of successful computations        1
+
+             Proportions                   Percentiles
+        Expected    Observed         Expected       Observed
+           0.990       0.000       -45065.943     -45065.943
+           0.980       0.000       -45065.943     -45065.943
+           0.950       0.000       -45065.943     -45065.943
+           0.900       0.000       -45065.943     -45065.943
+           0.800       0.000       -45065.943     -45065.943
+           0.700       0.000       -45065.943     -45065.943
+           0.500       0.000       -45065.943     -45065.943
+           0.300       0.000       -45065.943     -45065.943
+           0.200       0.000       -45065.943     -45065.943
+           0.100       0.000       -45065.943     -45065.943
+           0.050       0.000       -45065.943     -45065.943
+           0.020       0.000       -45065.943     -45065.943
+           0.010       0.000       -45065.943     -45065.943
+
+Information Criteria
+
+    Akaike (AIC)
+
+        Mean                             90146.606
+        Std Dev                              0.000
+        Number of successful computations        1
+
+             Proportions                   Percentiles
+        Expected    Observed         Expected       Observed
+           0.990       0.000        90146.606      90146.606
+           0.980       0.000        90146.606      90146.606
+           0.950       0.000        90146.606      90146.606
+           0.900       0.000        90146.606      90146.606
+           0.800       0.000        90146.606      90146.606
+           0.700       0.000        90146.606      90146.606
+           0.500       0.000        90146.606      90146.606
+           0.300       0.000        90146.606      90146.606
+           0.200       0.000        90146.606      90146.606
+           0.100       0.000        90146.606      90146.606
+           0.050       0.000        90146.606      90146.606
+           0.020       0.000        90146.606      90146.606
+           0.010       0.000        90146.606      90146.606
+
+    Bayesian (BIC)
+
+        Mean                             90198.355
+        Std Dev                              0.000
+        Number of successful computations        1
+
+             Proportions                   Percentiles
+        Expected    Observed         Expected       Observed
+           0.990       0.000        90198.355      90198.355
+           0.980       0.000        90198.355      90198.355
+           0.950       0.000        90198.355      90198.355
+           0.900       0.000        90198.355      90198.355
+           0.800       0.000        90198.355      90198.355
+           0.700       0.000        90198.355      90198.355
+           0.500       0.000        90198.355      90198.355
+           0.300       0.000        90198.355      90198.355
+           0.200       0.000        90198.355      90198.355
+           0.100       0.000        90198.355      90198.355
+           0.050       0.000        90198.355      90198.355
+           0.020       0.000        90198.355      90198.355
+           0.010       0.000        90198.355      90198.355
+
+    Sample-Size Adjusted BIC (n* = (n + 2) / 24)
+
+        Mean                             90176.110
+        Std Dev                              0.000
+        Number of successful computations        1
+
+             Proportions                   Percentiles
+        Expected    Observed         Expected       Observed
+           0.990       0.000        90176.110      90176.110
+           0.980       0.000        90176.110      90176.110
+           0.950       0.000        90176.110      90176.110
+           0.900       0.000        90176.110      90176.110
+           0.800       0.000        90176.110      90176.110
+           0.700       0.000        90176.110      90176.110
+           0.500       0.000        90176.110      90176.110
+           0.300       0.000        90176.110      90176.110
+           0.200       0.000        90176.110      90176.110
+           0.100       0.000        90176.110      90176.110
+           0.050       0.000        90176.110      90176.110
+           0.020       0.000        90176.110      90176.110
+           0.010       0.000        90176.110      90176.110
+
+Chi-Square Test of Model Fit
+
+        Degrees of freedom                       1
+
+        Mean                                 0.787
+        Std Dev                              0.000
+        Number of successful computations        1
+
+             Proportions                   Percentiles
+        Expected    Observed         Expected       Observed
+           0.990       1.000            0.000          0.787
+           0.980       1.000            0.001          0.787
+           0.950       1.000            0.004          0.787
+           0.900       1.000            0.016          0.787
+           0.800       1.000            0.064          0.787
+           0.700       1.000            0.148          0.787
+           0.500       1.000            0.455          0.787
+           0.300       0.000            1.074          0.787
+           0.200       0.000            1.642          0.787
+           0.100       0.000            2.706          0.787
+           0.050       0.000            3.841          0.787
+           0.020       0.000            5.412          0.787
+           0.010       0.000            6.635          0.787
+
+RMSEA (Root Mean Square Error Of Approximation)
+
+        Mean                                 0.000
+        Std Dev                              0.000
+        Number of successful computations        1
+
+             Proportions                   Percentiles
+        Expected    Observed         Expected       Observed
+           0.990       0.000            0.000          0.000
+           0.980       0.000            0.000          0.000
+           0.950       0.000            0.000          0.000
+           0.900       0.000            0.000          0.000
+           0.800       0.000            0.000          0.000
+           0.700       0.000            0.000          0.000
+           0.500       0.000            0.000          0.000
+           0.300       0.000            0.000          0.000
+           0.200       0.000            0.000          0.000
+           0.100       0.000            0.000          0.000
+           0.050       0.000            0.000          0.000
+           0.020       0.000            0.000          0.000
+           0.010       0.000            0.000          0.000
+
+SRMR (Standardized Root Mean Square Residual) for the WITHIN level
+
+        Mean                                 0.000
+        Std Dev                              0.000
+        Number of successful computations        1
+
+             Proportions                   Percentiles
+        Expected    Observed         Expected       Observed
+           0.990       0.000            0.000          0.000
+           0.980       0.000            0.000          0.000
+           0.950       0.000            0.000          0.000
+           0.900       0.000            0.000          0.000
+           0.800       0.000            0.000          0.000
+           0.700       0.000            0.000          0.000
+           0.500       0.000            0.000          0.000
+           0.300       0.000            0.000          0.000
+           0.200       0.000            0.000          0.000
+           0.100       0.000            0.000          0.000
+           0.050       0.000            0.000          0.000
+           0.020       0.000            0.000          0.000
+           0.010       0.000            0.000          0.000
+
+SRMR (Standardized Root Mean Square Residual) for the BETWEEN level
+
+        Mean                                 0.041
+        Std Dev                              0.000
+        Number of successful computations        1
+
+             Proportions                   Percentiles
+        Expected    Observed         Expected       Observed
+           0.990       0.000            0.041          0.041
+           0.980       0.000            0.041          0.041
+           0.950       0.000            0.041          0.041
+           0.900       0.000            0.041          0.041
+           0.800       0.000            0.041          0.041
+           0.700       0.000            0.041          0.041
+           0.500       0.000            0.041          0.041
+           0.300       0.000            0.041          0.041
+           0.200       0.000            0.041          0.041
+           0.100       0.000            0.041          0.041
+           0.050       0.000            0.041          0.041
+           0.020       0.000            0.041          0.041
+           0.010       0.000            0.041          0.041
+
+
+
+MODEL RESULTS
+
+                           ESTIMATES              S. E.     M. S. E.  95%  % Sig
+              Population   Average   Std. Dev.   Average             Cover Coeff
+Within Level
+
+ POST       ON
+  PRE              0.800     0.8032     0.0000     0.0051     0.0000 1.000 1.000
+
+ Variances
+  PRE              0.500     4.0511     0.0000     0.0566    12.6105 0.000 1.000
+
+ Residual Variances
+  POST             1.440     1.4094     0.0000     0.0180     0.0009 1.000 1.000
+
+Between Level
+
+ Means
+  POST             0.000     0.0897     0.0000     0.0855     0.0080 1.000 0.000
+  PRE              0.000    -0.0116     0.0000     0.0821     0.0001 1.000 0.000
+
+ Variances
+  POST             1.000     1.1448     0.0000     0.1293     0.0210 1.000 1.000
+  PRE              1.000     1.0499     0.0000     0.1219     0.0025 1.000 1.000
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Average Condition Number for the Information Matrix      0.162E-02
+       (ratio of smallest to largest eigenvalue)
+
+
+TECHNICAL 1 OUTPUT
+
+
+     PARAMETER SPECIFICATION FOR WITHIN
+
+
+           NU
+              POST          PRE
+              ________      ________
+ 1                  0             0
+
+
+           LAMBDA
+              POST          PRE
+              ________      ________
+ POST               0             0
+ PRE                0             0
+
+
+           THETA
+              POST          PRE
+              ________      ________
+ POST               0
+ PRE                0             0
+
+
+           ALPHA
+              POST          PRE
+              ________      ________
+ 1                  0             0
+
+
+           BETA
+              POST          PRE
+              ________      ________
+ POST               0             1
+ PRE                0             0
+
+
+           PSI
+              POST          PRE
+              ________      ________
+ POST               2
+ PRE                0             3
+
+
+     PARAMETER SPECIFICATION FOR BETWEEN
+
+
+           NU
+              POST          PRE
+              ________      ________
+ 1                  0             0
+
+
+           LAMBDA
+              POST          PRE
+              ________      ________
+ POST               0             0
+ PRE                0             0
+
+
+           THETA
+              POST          PRE
+              ________      ________
+ POST               0
+ PRE                0             0
+
+
+           ALPHA
+              POST          PRE
+              ________      ________
+ 1                  4             5
+
+
+           BETA
+              POST          PRE
+              ________      ________
+ POST               0             0
+ PRE                0             0
+
+
+           PSI
+              POST          PRE
+              ________      ________
+ POST               6
+ PRE                0             7
+
+
+     STARTING VALUES FOR WITHIN
+
+
+           NU
+              POST          PRE
+              ________      ________
+ 1              0.000         0.000
+
+
+           LAMBDA
+              POST          PRE
+              ________      ________
+ POST           1.000         0.000
+ PRE            0.000         1.000
+
+
+           THETA
+              POST          PRE
+              ________      ________
+ POST           0.000
+ PRE            0.000         0.000
+
+
+           ALPHA
+              POST          PRE
+              ________      ________
+ 1              0.000         0.000
+
+
+           BETA
+              POST          PRE
+              ________      ________
+ POST           0.000         0.800
+ PRE            0.000         0.000
+
+
+           PSI
+              POST          PRE
+              ________      ________
+ POST           1.440
+ PRE            0.000         0.500
+
+
+     STARTING VALUES FOR BETWEEN
+
+
+           NU
+              POST          PRE
+              ________      ________
+ 1              0.000         0.000
+
+
+           LAMBDA
+              POST          PRE
+              ________      ________
+ POST           1.000         0.000
+ PRE            0.000         1.000
+
+
+           THETA
+              POST          PRE
+              ________      ________
+ POST           0.000
+ PRE            0.000         0.000
+
+
+           ALPHA
+              POST          PRE
+              ________      ________
+ 1              0.000         0.000
+
+
+           BETA
+              POST          PRE
+              ________      ________
+ POST           0.000         0.000
+ PRE            0.000         0.000
+
+
+           PSI
+              POST          PRE
+              ________      ________
+ POST           1.000
+ PRE            0.000         1.000
+
+
+     POPULATION VALUES FOR WITHIN
+
+
+           NU
+              POST          PRE
+              ________      ________
+ 1              0.000         0.000
+
+
+           LAMBDA
+              POST          PRE
+              ________      ________
+ POST           1.000         0.000
+ PRE            0.000         1.000
+
+
+           THETA
+              POST          PRE
+              ________      ________
+ POST           0.000
+ PRE            0.000         0.000
+
+
+           ALPHA
+              POST          PRE
+              ________      ________
+ 1              0.000         0.000
+
+
+           BETA
+              POST          PRE
+              ________      ________
+ POST           0.000         0.800
+ PRE            0.000         0.000
+
+
+           PSI
+              POST          PRE
+              ________      ________
+ POST           1.440
+ PRE            0.000         4.000
+
+
+     POPULATION VALUES FOR BETWEEN
+
+
+           NU
+              POST          PRE
+              ________      ________
+ 1              0.000         0.000
+
+
+           LAMBDA
+              POST          PRE
+              ________      ________
+ POST           1.000         0.000
+ PRE            0.000         1.000
+
+
+           THETA
+              POST          PRE
+              ________      ________
+ POST           0.000
+ PRE            0.000         0.000
+
+
+           ALPHA
+              POST          PRE
+              ________      ________
+ 1              0.000         0.000
+
+
+           BETA
+              POST          PRE
+              ________      ________
+ POST           0.000         0.000
+ PRE            0.000         0.000
+
+
+           PSI
+              POST          PRE
+              ________      ________
+ POST           1.000
+ PRE            0.000         1.000
+
+
+TECHNICAL 9 OUTPUT
+
+  Error messages for each replication (if any)
+
+
+
+SAVEDATA INFORMATION
+
+  Order of variables
+
+    POST
+    PRE
+    CLUSTER
+
+  Save file
+    variancetest.dat
+
+  Save file format           Free
+  Save file record length    10000
+
+
+DIAGRAM INFORMATION
+
+  Mplus diagrams are currently not available for multilevel analysis.
+  No diagram output was produced.
+
+
+     Beginning Time:  13:50:23
+        Ending Time:  13:50:24
+       Elapsed Time:  00:00:01
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2013 Muthen & Muthen
