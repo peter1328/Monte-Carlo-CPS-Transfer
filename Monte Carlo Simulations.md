@@ -23,7 +23,7 @@ Apart from the twolevel regression model, all assumptions were chosen in a conse
 ##Results
 Esimated power to detect the intervention effects in dependence of sample size is depicted in Figure 1. The threshold of power >.80 was reached at a sample size of N = 700. At the maximum planned sample size of 1200, power was estimated at .96. These results confirm that a sample size of between 700 and 1200 students can be seen optimal to detect small to moderate transfer effects with sufficiently high but not too high certainty and an optimal balance of alpha and beta error risk can be reached.
 
-![plot of chunk unnamed-chunk-1](figure/unnamed-chunk-1-1.png) 
+![plot of chunk unnamed-chunk-1](unnamed-chunk-1-1.png) 
 
 
 ##References
